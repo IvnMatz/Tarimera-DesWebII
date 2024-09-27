@@ -1,0 +1,20 @@
+input, button {
+    display: block;
+    margin-bottom: 10px; /* Espaciado entre los elementos */
+  }
+
+  h2 {
+    display: block;
+    background-color:darkcyan;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+  button:hover{
+    background-color: white;
+    color: black;
+  }
+
+  a{
+    color: black;
+    text-decoration: none;
+  }

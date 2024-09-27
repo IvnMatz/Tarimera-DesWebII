@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ens">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+    <link rel="icon" href="icon.png" type="image/x-icon">
+
+</head>
+<body>
+    <button> <a href="http://localhost:5000/"> Menu Principal </a> </button>
+  <h2> Iniciar Sesión </h2>
+    <form method="POST">
+        <input type="text" name="username" placeholder="Nombre de Usuario">
+        <input type="password" name="password" placeholder="Contraseña">
+        <button type="submit"> Iniciar Sesión </button>
+    </form>
+</body>
+</html>
