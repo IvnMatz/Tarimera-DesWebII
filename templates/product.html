@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+</head>
+<body>
+    <h1> {{ product.name }} </h1>
+    <h2> $ {{ product.precio }} </h2>
+    <h3> {{ product.desc }} </h3>
+    <h4> {{ product.dimension }} cm </h4>
+    <h4> {{ product.peso }} kg </h4>
+
+    <h3> Reseñas: </h3>
+    {% if reviews %}
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <h2> {{ review[2] }} </h2>
+                    <h3> by: {{ review[0] }} Calificación: {{ review[4] }} </h3>
+                    <h4> {{ review[3] }} </h4>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3> No hay reseñas aún </h3>
+    {% endif %}
+</body>
+</html>
