@@ -14,7 +14,11 @@
     </style>
 </head>
 <body>
-    <button><a href="http://localhost:5000/Login" > Iniciar Sesión </a> </button>
-    <button> <a href="http://localhost:5000/register" > Registrar Usuario </a> </button>
+    {% if user.auth %}
+        <button> Perfil </button>
+    {% else %}
+        <a href="http://localhost:5000/login" > Iniciar Sesión </a>
+        <a href="http://localhost:5000/register" > Registrar Usuario </a>
+    {% endif %}
 </body>
 </html>

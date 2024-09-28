@@ -1,7 +1,8 @@
 import pyodbc
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session, redirect, url_for
 
 app = Flask(__name__)
+app.secret_key = 'papuClave'
 
 # Definir los parámetros de conexión
 server = '(localdb)\\MainServer'  
@@ -15,7 +16,12 @@ conn_str = f'DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={server};DATABASE={
 # Main Route
 @app.route("/")
 def index():
-    return render_template('index.html')
+    user = {}
+    if 'username' in session:
+        user['auth'] = session['is_authenticated']
+    else:
+        user['auth'] = False
+    return render_template('index.html', user=user)
 
 # Register Route
 @app.route("/register", methods=['GET', 'POST'])
@@ -35,19 +41,21 @@ def register():
             MaxID = cursor.fetchall()
             for row in MaxID:
                 newID = int(row[0]) + 1
-            cursor.execute(f"INSERT INTO users VALUES({int(newID)}, \'{str(username)}\', \'{str(password)}\', \'{str(mail)}\')")
+            cursor.execute(f"INSERT INTO users VALUES({newID}, \'{username}\', \'{password}\', \'{mail}\', \'ES\', 0)")
             conn.commit()
 
             cursor.close()
             conn.close()
-        except Exception as e:
-            print(f"Error al conectar a SQL Server: {e}")
 
-        return 'Registro Completado'
+            return "registro completo"
+        except Exception as e:
+            return f"Error {e}"
+
+        
     return render_template('register.html')
 
 # Login Route
-@app.route("/Login", methods=['GET', 'POST'])
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']  # username, password
@@ -65,11 +73,29 @@ def login():
             cursor.close()
             conn.close()
             if returnedUser:
-                return 'Sesión Iniciada con Éxito'
+                session['username'] = username
+                session['id'] = returnedUser[0][0]
+                session['is_authenticated'] = True
+                return 'Sesión iniciada !'
             else:
                 return 'Usuario o contraseña Mal ingresados'
 
         except Exception as e:
-            print(f"Error al conectar a SQL Server: {e}")
+            return f"Error {e}"
 
     return render_template('login.html')
+
+@app.route('/user')
+def userpage():
+    return render_template("profPage.html")
+
+@app.route('/product/<id_product>')
+def product(id_product):
+    return f"Producto {id_product}"
+
+@app.route('/logout')
+def logout():
+    session.pop('is_athenticated', None)
+    session.pop('username', None)
+    session.pop('id', None)
+    return redirect(url_for('login'))
