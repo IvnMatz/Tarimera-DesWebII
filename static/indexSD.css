@@ -2,10 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: black;
 }
 
 .navbar {
-    background-color: #9CC2D9;
+    background-color: #142936;
     overflow: hidden;
     position:fixed;
     top: 0%;
@@ -27,7 +28,7 @@
 
 .navbar ul li a {
     display: inline-block;
-    color: black;
+    color: rgb(255, 255, 255);
     text-align: center;
     padding: 14px 20px;
     text-decoration: none;
@@ -42,8 +43,8 @@
 }
 
 .navbar ul li a:hover {
-    background-color: #000000;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
 }
 
 .navbar ul li input{
@@ -51,12 +52,13 @@
     width: 500px;
     height: 30px;
     border-radius: 13px;
-    background-color: #9CC2D9;
-    color: black;
+    background-color: #142936;
+    color: rgb(255, 255, 255);
     transition: 0.25s ;
 }
 
 .navbar ul li input::placeholder { 
+    color:white;
     text-align: center;
 }
 
@@ -80,5 +82,10 @@
     align-content: center;
     align-items: center;
     padding:200px;
-    background-color: #B9D4E4;
+    background-color: #1c3c50;
+    color: white;
+}
+
+.presentation p, .presentation h1, .presentation a{
+    background-color: #1c3c50;
 }

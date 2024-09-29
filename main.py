@@ -1,7 +1,15 @@
 import pyodbc
-from flask import Flask, request, render_template, session, redirect, url_for
+from flask import Flask, request, render_template, session, redirect, url_for, abort
+from handleErrors import error_handlers_bp
+import os
+
+UPLOAD_FOLDER = 'static/Uploaded_img'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.register_blueprint(error_handlers_bp)
 app.secret_key = 'butImWithTheHomiesRightNow'
 
 # Definir los parámetros de conexión
@@ -10,27 +18,19 @@ database = 'UsersWebP'
 
 conn_str = f'DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
 
-
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # ROUTES ----------------------------------------------------------------------------
 # Main Route--------------------------------------------------------------------------
 @app.route("/")
 def index():
-    user = {}
-    if 'username' in session:
-        user['auth'] = session['is_authenticated']
+    if 'is_authenticated' in session:
+        return render_template('index.html', user=session['is_authenticated'], theme=session['theme'])
     else:
-        user['auth'] = False
-    return render_template('index.html', user=user)
-
-#ERROR HANDLER FUNCTIONS--------------------------------------------------------------
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template("error.html", error=f"{e.code} {e.description}"), 404
-
-@app.errorhandler(500)
-def server_error(e):
-    return render_template("error.html", error=f"{e.code} {e.description}"), 500
+        return render_template('index.html', user=False, theme=0)
+    
 
 # Register Route --------------------------------------------------------------------
 @app.route("/register", methods=['GET', 'POST'])
@@ -58,7 +58,7 @@ def register():
 
             return "registro completo"
         except Exception as e:
-            return render_template("error.html", error=e)
+            return render_template("error.html", error=e, code=f"img/500.png")
 
         
     return render_template('register.html')
@@ -86,14 +86,14 @@ def login():
                 session['id'] = returnedUser[0][0] # 0=ID 1=Username 2=Password 3=Mail 4=Language 5=theme (0=light, 1=Dark)
                 session['is_authenticated'] = True
                 session['mail'] = returnedUser[0][3]
-                session['lang'] = returnedUser[0][4]
+                #session['lang'] = returnedUser[0][4]
                 session['theme'] = returnedUser[0][5]
                 return redirect(url_for('index'))
             else:
                 return 'Usuario o contraseña Mal ingresados'
 
         except Exception as e:
-            return render_template("error.html", error=e)
+            return render_template("error.html", error=e, code=f"img/500.png")
 
     return render_template('login.html')
 
@@ -127,17 +127,46 @@ def product(id_product):
             product['dimension'] = returnedProd[0][4]
             product['peso'] = returnedProd[0][5]
         else:
-            return render_template("error.html", error="Página no encontrada")
+            abort(404)
 
     except Exception as e:
-        return render_template("error.html", error=e)
+        return render_template("error.html", error=e, code=f"img/500.png")
     
     return render_template("product.html", product=product, reviews=returnedRev)
+
+# ADMIN PAGE ROUTE -----------------------------------------------------------------------------
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if request.method == 'POST':
+        if "file" not in request.files:
+            return "No se encontró ningún archivo"
+        
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = file.filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return "Archivo subido"
+        else:
+            return "Archivo no aceptado"
+    if 'is_authenticated' not in session:
+        abort(403)
+    else:
+        print(session)
+        if session['id'] == 0:
+            return render_template("admin.html")
+        else:
+            abort(403)
 
 #logout route (Redirects to index) --------------------------------------------------------------
 @app.route('/logout')
 def logout():
-    session.pop('is_athenticated', None)
+    session.pop('is_authenticated', None)
     session.pop('username', None)
     session.pop('id', None)
+    session.pop('mail', None)
+    session.pop('lang', None)
+    session.pop('theme', None)
     return redirect(url_for('index'))
+
+if __name__ == '__main__':
+    app.run()

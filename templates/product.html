@@ -9,8 +9,20 @@
     <h1> {{ product.name }} </h1>
     <h2> $ {{ product.precio }} </h2>
     <h3> {{ product.desc }} </h3>
-    <h4> {{ product.dimension }} cm </h4>
-    <h4> {{ product.peso }} kg </h4>
+    <table border="1">
+        <thead>
+            <tr>
+                <th> Dimensiones </th>
+                <th> Peso </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th> {{ product.dimension }} cm </th>
+                <th> {{ product.peso }} kg </th>
+            </tr>
+        </tbody>
+    </table>
 
     <h3> Reseñas: </h3>
     {% if reviews %}
