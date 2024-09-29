@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
-    <style>
-        a{
-    color: black;
-    text-decoration: none;
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='indexS.css') }}">
 </head>
 <body>
-    {% if user.auth %}
-        <button> Perfil </button>
-    {% else %}
-        <a href="http://localhost:5000/login" > Iniciar Sesión </a>
-        <a href="http://localhost:5000/register" > Registrar Usuario </a>
-    {% endif %}
+    
+        <nav class="navbar">
+            <ul>
+        {% if user.auth %}
+            <li><a href="http://localhost:5000/user"> Perfil </a></li>
+        {% else %}
+            <li><a href="http://localhost:5000/login" > Iniciar Sesión </a></li>
+            <li><a href="http://localhost:5000/register" > Registrar Usuario </a></li>
+        {% endif %}
+            </ul>
+        </nav>
+    
 </body>
 </html>

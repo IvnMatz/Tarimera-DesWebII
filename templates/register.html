@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='formsStyles.css') }}">
-    <link rel="icon" href="icon.png" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='icons/icon.png') }}" type="image/x-icon">
 </head>
 <body>
     <form method="POST" class="form-box">
         <h2 class="title"> Registrarse </h2>
-        <input type="text" name="username" placeholder="Nombre de Usuario">
-        <input type="text" name="mail" placeholder="Correo Electronico">
-        <input type="password" name="password" placeholder="Contraseña">
+        <input type="text" name="username" maxlength="50" placeholder="Nombre de Usuario">
+        <input type="text" name="mail" maxlength="100" placeholder="Correo Electronico">
+        <input type="password" name="password" maxlength="19" placeholder="Contraseña">
         <button type="submit"> Registrar </button>
     </form>
 </body>

@@ -1,0 +1,41 @@
+header{
+    margin: 0%;
+    padding: 0%;
+}
+
+.navbar {
+    background-color: #a09b9b;
+    overflow: hidden;
+    position:absolute;
+    top: 0%;
+    left: 0%;
+    width:100%;
+    z-index: 1000;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: right;
+}
+
+.navbar ul li {
+    display: inline;
+}
+
+.navbar ul li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 17px;
+
+    transition: transform 0.2s;
+}
+
+.navbar ul li a:hover {
+    background-color: #000000;
+    color: white;
+}

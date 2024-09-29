@@ -3,10 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eres un pedejo</title>
+    <title>Eres un pendejo</title>
+    <style>
+        .imgf {
+            float: left;         /* Hace que la imagen flote a la izquierda */
+            margin-right: 15px;  /* Espacio entre la imagen y el texto */
+            width: 300px;        /* Ancho de la imagen */
+            height: auto;        /* La altura se ajusta proporcionalmente */
+        }
+
+        h3, h1 {
+            text-align: justify; /* Para justificar el texto, si es necesario */
+        }   
+
+        a{
+            color:black;
+            text-decoration: none;
+            border:2px solid black;
+            transition: 0.5s;
+            padding: 10px 20px;  
+        }
+        a:hover{
+            color: white;
+            background-color: black;
+        }
+    </style>
 </head>
 <body>
+    <img src="{{ url_for('static', filename='img/not_exist.png') }}" width="300" height="300" class="imgf">
     <h1> Parece que ha ocurrido un error con tu petición! </h1>
     <h3> Error de tipo: {{ error }} </h3>
+    <a href="http://localhost:5000/"> volver a la página principal </a>
 </body>
 </html>

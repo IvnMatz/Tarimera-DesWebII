@@ -23,6 +23,15 @@ def index():
         user['auth'] = False
     return render_template('index.html', user=user)
 
+#ERROR HANDLER FUNCTIONS--------------------------------------------------------------
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("error.html", error=f"{e.code} {e.description}"), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template("error.html", error=f"{e.code} {e.description}"), 500
+
 # Register Route --------------------------------------------------------------------
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -118,7 +127,7 @@ def product(id_product):
             product['dimension'] = returnedProd[0][4]
             product['peso'] = returnedProd[0][5]
         else:
-            return 'Este producto no existe, lol'
+            return render_template("error.html", error="Página no encontrada")
 
     except Exception as e:
         return render_template("error.html", error=e)
