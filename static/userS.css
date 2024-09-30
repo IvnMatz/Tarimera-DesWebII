@@ -1,13 +1,11 @@
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: black;
 }
 
 .navbar {
-    background-color: #142936;
+    background-color: #9CC2D9;
     overflow: hidden;
     position:fixed;
     top: 0%;
@@ -29,7 +27,7 @@
 
 .navbar ul li a {
     display: inline-block;
-    color: rgb(255, 255, 255);
+    color: black;
     text-align: center;
     padding: 14px 20px;
     text-decoration: none;
@@ -44,8 +42,8 @@
 }
 
 .navbar ul li a:hover {
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
+    background-color: #000000;
+    color: white;
 }
 
 .navbar ul li input{
@@ -53,13 +51,12 @@
     width: 500px;
     height: 30px;
     border-radius: 13px;
-    background-color: #142936;
-    color: rgb(255, 255, 255);
+    background-color: #9CC2D9;
+    color: black;
     transition: 0.25s ;
 }
 
 .navbar ul li input::placeholder { 
-    color:white;
     text-align: center;
 }
 
@@ -67,36 +64,4 @@
     width: 800px;
     color: white;
     text-align: center;
-}
-
-.pr {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.presentation {
-    width: 1200px;
-    height: 600px;
-    border-radius: 20px;
-    align-content: center;
-    align-items: center;
-    padding:200px;
-    background-color: #1c3c50;
-    color: white;
-}
-
-.presentation p, .presentation h1, .presentation a{
-    background-color: #1c3c50;
-}
-
-.product {
-    display: inline-block; /* Alinea los divs horizontalmente */
-    padding: 20px;
-    margin: 10px;
-
-    width: 50px;
-    height: 70px;
-    border: 2px solid;
 }

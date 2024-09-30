@@ -15,7 +15,7 @@
         <nav class="navbar">
             <ul>
             <li> <input type="search" placeholder="🔎 Buscar"> </li>
-            <li> <a href="#About"> Acerca de </a> </li>
+            <li> <a href="#about"> Acerca de </a> </li>
         {% if user %}
             <li><a href="http://localhost:5000/user"> Perfil </a></li>
             <li> <a href="http://localhost:5000/logout"> Cerrar Sesión </a> </li>
@@ -28,12 +28,34 @@
         </nav>
 
         <div class="content">
-            <div class="pr">
+            <div class="pr" id="about">
                 <div class="presentation">
+                    <div class="text-pr">
                     <h1> Tarimera </h1>
-                    <p> Descripción </p>
+                    <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt minus dolorum maxime quod quasi minima placeat in, obcaecati eaque nulla aspernatur perferendis dicta voluptatum soluta aliquid tempore saepe facere. Debitis! </p>
                     <a> Contactanos </a>
                 </div>
+                <img src="{{ url_for('static', filename='img/Tarima.png') }}" class="imgf">
+                </div>
+            </div>
+            
+            <div class="productL">
+                <h1> Productos Destacados </h1>
+                    <div class="productList">
+                        {% if products %}
+                            {% for product in products %}
+                            <a href="http://localhost:5000/product/{{ product[0] }}">
+                                <div class="product">
+                                     <img src="{{ url_for('static', filename='img/' + product[0]|string + '.png') }}">
+                                     <h3> {{ product[1] }} </h3>
+                                    <p> $ {{ product[2] }} </p>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        {% else %}
+                            <h3> Aún no hay productos </h3>
+                        {% endif %}
+                    </div>
             </div>
         </div>
     

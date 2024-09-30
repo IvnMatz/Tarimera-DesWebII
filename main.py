@@ -1,6 +1,7 @@
 import pyodbc
 from flask import Flask, request, render_template, session, redirect, url_for, abort
 from handleErrors import error_handlers_bp
+from postEp import rutas_bp
 import os
 
 UPLOAD_FOLDER = 'static/Uploaded_img'
@@ -10,9 +11,10 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.register_blueprint(error_handlers_bp)
+app.register_blueprint(rutas_bp)
 app.secret_key = 'butImWithTheHomiesRightNow'
 
-# Definir los parámetros de conexión
+# Parametros Conexión SQL Server
 server = '(localdb)\\MainServer'  
 database = 'UsersWebP'
 
@@ -26,41 +28,28 @@ def allowed_file(filename):
 # Main Route--------------------------------------------------------------------------
 @app.route("/")
 def index():
+    try:
+        conn = pyodbc.connect(conn_str)
+        print("Conexión exitosa")
+        cursor = conn.cursor()
+        cursor.execute(f"select top (3) id_product, nombre, price from products")
+        returnedProd = cursor.fetchall()
+        print(returnedProd)
+        cursor.close()
+        conn.close()
+        
+    except Exception as e:
+        return render_template("error.html", error=e, code=f"img/500.png")
+
     if 'is_authenticated' in session:
-        return render_template('index.html', user=session['is_authenticated'], theme=session['theme'])
+        return render_template('index.html', user=session['is_authenticated'], theme=session['theme'], products=returnedProd)
     else:
-        return render_template('index.html', user=False, theme=0)
+        return render_template('index.html', user=False, theme=0, products=returnedProd)
     
 
 # Register Route --------------------------------------------------------------------
-@app.route("/register", methods=['GET', 'POST'])
+@app.route("/register", methods=['GET'])
 def register():
-    if request.method == 'POST':
-        username = request.form['username']  # username, mail, password
-        mail = request.form['mail']
-        password = request.form['password']
-        
-        try:
-            conn = pyodbc.connect(conn_str)
-            print("Conexión exitosa")
-    
-            cursor = conn.cursor()
-
-            cursor.execute("SELECT max(id_user) from users")
-            MaxID = cursor.fetchall()
-            for row in MaxID:
-                newID = int(row[0]) + 1
-            cursor.execute(f"INSERT INTO users VALUES({newID}, \'{username}\', \'{password}\', \'{mail}\', \'ES\', 0)")
-            conn.commit()
-
-            cursor.close()
-            conn.close()
-
-            return "registro completo"
-        except Exception as e:
-            return render_template("error.html", error=e, code=f"img/500.png")
-
-        
     return render_template('register.html')
 
 # Login Route -------------------------------------------------------------------
@@ -101,6 +90,7 @@ def login():
 @app.route('/user')
 def userpage():
     user = session
+    
     return render_template("user.html", user=user)
 
 #Product Route ---------------------------------------------------------------------------------
@@ -135,19 +125,8 @@ def product(id_product):
     return render_template("product.html", product=product, reviews=returnedRev)
 
 # ADMIN PAGE ROUTE -----------------------------------------------------------------------------
-@app.route('/admin', methods=['GET', 'POST'])
-def admin():
-    if request.method == 'POST':
-        if "file" not in request.files:
-            return "No se encontró ningún archivo"
-        
-        file = request.files['file']
-        if file and allowed_file(file.filename):
-            filename = file.filename
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return "Archivo subido"
-        else:
-            return "Archivo no aceptado"
+@app.route('/admin', methods=['GET'])
+def admin():  
     if 'is_authenticated' not in session:
         abort(403)
     else:
@@ -156,6 +135,20 @@ def admin():
             return render_template("admin.html")
         else:
             abort(403)
+
+#UPLOAD ROUTE (POST)-----------------------------------------------------------------------------
+@app.route('/upload_file', methods=['POST'])
+def upload_file():
+    if "file" not in request.files:
+            return "No se encontró ningún archivo"
+        
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+        filename = file.filename
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return "Archivo subido"
+    else:
+        return "Archivo no aceptado"
 
 #logout route (Redirects to index) --------------------------------------------------------------
 @app.route('/logout')
@@ -168,5 +161,6 @@ def logout():
     session.pop('theme', None)
     return redirect(url_for('index'))
 
+## CORRER EL PROGRAMA ------------------------------------------------------------------------------
 if __name__ == '__main__':
     app.run()

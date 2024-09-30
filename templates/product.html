@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='prodS.css') }}">
     <title>{{ product.name }}</title>
 </head>
 <body>
+    {% include 'navbar.html' %}
+
+    <div class="content">
     <h1> {{ product.name }} </h1>
     <h2> $ {{ product.precio }} </h2>
     <h3> {{ product.desc }} </h3>
@@ -18,7 +22,7 @@
         </thead>
         <tbody>
             <tr>
-                <th> {{ product.dimension }} cm </th>
+                <th> {{ product.dimension }} </th>
                 <th> {{ product.peso }} kg </th>
             </tr>
         </tbody>
@@ -38,5 +42,7 @@
     {% else %}
         <h3> No hay reseñas aún </h3>
     {% endif %}
+
+    </div>
 </body>
 </html>
