@@ -36,13 +36,31 @@
     </div>
     <div class="reviews">
         <h3> Reseñas: </h3>
+
+        {% if user %}
+            <div class="addReview">
+                 <h4> Añadir una reseña: </h4>
+                <form action="{{ post }}" method="post" id="form" class="addRform">
+                    <input type="text" id="t" name="title" placeholder="titulo" maxlength="30">
+                    <input type="range" id="r" name="range" min="1" max="5" value="3">
+                    <h3> ⭐ </h3>
+                    <textarea id="d" name="description" rows="4" cols="50", placeholder="Descripción" maxlength="100"></textarea>
+                    <button type="submit"> Publicar </button>
+                </form>
+            </div>
+        {% endif %}
+        <div class="reviewL">
+            <h3> Lista de reseñas: </h3>
         {% if reviews %}
             <ul>
             {% for review in reviews %}
-                <li>
-                    <h2> {{ review[2] }} </h2>
-                    <h3> by: {{ review[0] }} Calificación: {{ review[4] }} </h3>
-                    h4> {{ review[3] }} </h4>
+                <li class="rev">
+                    <h4> {{ review[2] }} </h4>
+                    <h5> Escrita por: {{ review[0] }} </h5> 
+                    {% for i in range(review[4]) %}
+                    <p id="star" > ⭐ </p>
+                    {% endfor %}
+                    <p> {{ review[3] }} </p>
                 </li>
             {% endfor %}
             </ul>
@@ -50,5 +68,8 @@
             <h3> No hay reseñas aún </h3>
         {% endif %}
     </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/postR.js') }}"></script>
 </body>
 </html>

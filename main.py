@@ -97,6 +97,8 @@ def userpage():
 @app.route('/product/<id_product>')
 def product(id_product):
     product = {}
+
+    post_a = "/post-a-review/" + str(id_product)
     try:
         conn = pyodbc.connect(conn_str)
         print("Conexión exitosa")
@@ -123,7 +125,11 @@ def product(id_product):
     except Exception as e:
         return render_template("error.html", error=e, code=f"img/404.png")
     
-    return render_template("product.html", product=product, reviews=returnedRev)
+    if 'is_authenticated' in session:
+        return render_template("product.html", product=product, reviews=returnedRev, user=session['is_authenticated'], post=post_a)
+    else:
+        return render_template("product.html", product=product, reviews=returnedRev, user=False)
+    
 
 # ADMIN PAGE ROUTE -----------------------------------------------------------------------------
 @app.route('/admin', methods=['GET'])
@@ -140,6 +146,11 @@ def admin():
 #UPLOAD ROUTE (POST)-----------------------------------------------------------------------------
 @app.route('/upload_file', methods=['POST'])
 def upload_file():
+    if 'is_authenticated' not in session:
+        return "No se tiene una sesión iniciada"
+    if session['id'] != 0:
+        return "No se tiene permisos para acceder a esta ruta"
+
     if "file" not in request.files:
             return "No se encontró ningún archivo"
         
