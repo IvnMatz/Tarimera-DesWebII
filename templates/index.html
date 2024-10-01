@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
     {% if theme == 0 %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='indexS.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/indexS.css') }}">
     {% else %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='indexSD.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/indexSD.css') }}">
     {% endif %}
 </head>
 <body>
     
         <nav class="navbar">
             <ul>
-            <li> <input type="search" placeholder="🔎 Buscar"> </li>
+            <li> <input type="search" class="search" placeholder="🔎 Buscar"> </li>
             <li> <a href="#about"> Acerca de </a> </li>
         {% if user %}
             <li><a href="http://localhost:5000/user"> Perfil </a></li>
@@ -46,7 +46,7 @@
                             {% for product in products %}
                             <a href="http://localhost:5000/product/{{ product[0] }}">
                                 <div class="product">
-                                     <img src="{{ url_for('static', filename='img/' + product[0]|string + '.png') }}">
+                                     <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
                                      <h3> {{ product[1] }} </h3>
                                     <p> $ {{ product[2] }} </p>
                                 </div>
@@ -58,6 +58,8 @@
                     </div>
             </div>
         </div>
-    
+
+
+        
 </body>
 </html>

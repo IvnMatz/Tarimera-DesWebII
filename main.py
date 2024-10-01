@@ -111,6 +111,7 @@ def product(id_product):
         conn.close()
         
         if returnedProd:
+            product['id'] = returnedProd[0][0]
             product['name'] = returnedProd[0][1]
             product['precio'] = returnedProd[0][2]
             product['desc'] = returnedProd[0][3]
@@ -120,7 +121,7 @@ def product(id_product):
             abort(404)
 
     except Exception as e:
-        return render_template("error.html", error=e, code=f"img/500.png")
+        return render_template("error.html", error=e, code=f"img/404.png")
     
     return render_template("product.html", product=product, reviews=returnedRev)
 
@@ -163,4 +164,4 @@ def logout():
 
 ## CORRER EL PROGRAMA ------------------------------------------------------------------------------
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
