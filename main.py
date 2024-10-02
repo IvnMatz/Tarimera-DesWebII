@@ -3,9 +3,9 @@ from flask import Flask, request, render_template, session, redirect, url_for, a
 from handleErrors import error_handlers_bp
 from postEp import rutas_bp
 import os
+from vFunctions import processor, allowed_file
 
 UPLOAD_FOLDER = 'static/Uploaded_img'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
 app = Flask(__name__)
@@ -19,10 +19,6 @@ server = '(localdb)\\MainServer'
 database = 'UsersWebP'
 
 conn_str = f'DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # ROUTES ----------------------------------------------------------------------------
 # Main Route--------------------------------------------------------------------------
@@ -161,6 +157,26 @@ def upload_file():
         return "Archivo subido"
     else:
         return "Archivo no aceptado"
+    
+# SEARCH ROUTE ----------------------------------------------------------------------------------
+@app.route('/search/<search_term>', methods=['GET'])
+def search(search_term):
+    result = {}
+    pSearchT = processor(search_term)
+
+    try:
+        conn = pyodbc.connect(conn_str)
+        print("Conexión exitosa")
+        cursor = conn.cursor()
+        cursor.execute(f"select id_product, nombre, price from products where nombre like \'%{pSearchT}%\'")
+        returnedP = cursor.fetchall()
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        return render_template("error.html", error=e, code=f"img/404.png")
+    
+    
+    return render_template('searched.html', SearchTerm=pSearchT, products=returnedP, user= 'is_authenticated' in session)
 
 #logout route (Redirects to index) --------------------------------------------------------------
 @app.route('/logout')

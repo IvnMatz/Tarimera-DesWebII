@@ -14,7 +14,10 @@
     
         <nav class="navbar">
             <ul>
-            <li> <input type="search" class="search" placeholder="🔎 Buscar"> </li>
+            <li> <form action="/search-p" method="POST">
+                <input type="search" name="search" placeholder="🔎 Buscar" autocomplete="off"> 
+                <button type="submit" style="opacity: 0;"></button> 
+               </form> </li>
             <li> <a href="#about"> Acerca de </a> </li>
         {% if user %}
             <li><a href="http://localhost:5000/user"> Perfil </a></li>

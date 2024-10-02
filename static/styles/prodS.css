@@ -44,6 +44,10 @@
     font-family: 'Inter', sans-serif;
 }
 
+.navbar form{
+    display: inline-block;
+}
+
 .navbar {
     background-color: #9CC2D9;
     overflow: hidden;

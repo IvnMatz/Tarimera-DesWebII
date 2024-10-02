@@ -1,5 +1,5 @@
 document.getElementById('form').addEventListener('submit', async function (event) {
-    event.preventDefault();  // Previene que el formulario se envíe de forma tradicional
+    event.preventDefault();  // evite el envio default
     
     const form = event.target;
     const formData = new FormData(form);  // Obtiene los datos del formulario
@@ -11,7 +11,6 @@ document.getElementById('form').addEventListener('submit', async function (event
         body: formData
       });
   
-      // Maneja la respuesta
       if (!response.ok) {
         throw new Error('Error en la respuesta del servidor');
       }

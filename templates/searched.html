@@ -3,9 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/searchS.css') }}">
     <title>Resultados para {{ SearchTerm }}</title>
 </head>
 <body>
-    
+    {% include 'navbar.html' %}
+
+    <div class="content">
+        <div class="results">
+            <h2 id="t"> Resultados para {{ SearchTerm }} </h2>
+            <div class="resultL">
+                {% if products %}
+                    {% for fila in products|batch(3) %}
+                        <div class="fila">
+                            {% for product in fila %}
+                            <a href="http://localhost:5000/product/{{ product[0] }}">
+                                <div class="product">
+                                    <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
+                                    <h2> {{ product[1] }} </h2>
+                                    <h3> $ {{ product[2] }} </h3>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                {% else %}
+                <h1> No hay resultados para {{ SearchTerm }} </h1>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
 </body>
 </html>

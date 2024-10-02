@@ -1,4 +1,5 @@
 from flask import Blueprint, abort, request, redirect, session, jsonify
+from vFunctions import processor
 import pyodbc
 
 rutas_bp = Blueprint('rutas', __name__)
@@ -6,6 +7,8 @@ server = '(localdb)\\MainServer'
 database = 'UsersWebP'
 
 conn_str = f'DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
+
+# RUTAS ---------------------------------------------------------------------
 
 @rutas_bp.route('/register-new-user', methods=['POST'])
 def registerN():
@@ -66,3 +69,12 @@ def postReview(id_product):
 
     response = { 'message' : 'ok' }
     return jsonify(response)
+
+@rutas_bp.route('/search-p', methods=['POST'])
+def searchP():
+    searchT = request.form['search']
+    pSearchT = processor(searchT)
+
+    redir = "http://localhost:5000/" "search/" + pSearchT
+
+    return redirect(redir)
