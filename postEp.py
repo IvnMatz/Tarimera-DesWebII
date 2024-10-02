@@ -78,3 +78,22 @@ def searchP():
     redir = "http://localhost:5000/" "search/" + pSearchT
 
     return redirect(redir)
+
+@rutas_bp.route('/save-product/<id_product>', methods=['POST'])
+def saveProduct(id_product):
+    userId = session['id']
+
+    try:
+        conn = pyodbc.connect(conn_str)
+        cursor = conn.cursor()
+
+        cursor.execute(f'INSERT INTO saved_product VALUES({userId}, {int(id_product)}) ')
+        cursor.commit()
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        abort(500)
+    
+    response = {'message' : 'saved'}
+    return jsonify(response)
+

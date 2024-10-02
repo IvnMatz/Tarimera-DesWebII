@@ -30,7 +30,6 @@ def index():
         cursor = conn.cursor()
         cursor.execute(f"select top (3) id_product, nombre, price from products")
         returnedProd = cursor.fetchall()
-        print(returnedProd)
         cursor.close()
         conn.close()
         
@@ -86,8 +85,34 @@ def login():
 @app.route('/user')
 def userpage():
     user = session
+
+    if 'id' not in session:
+        abort(403)
+
+    rQuery = f""" select products.nombre, review.title, review.calif, review.descript from review
+     join products on review.id_product=products.id_product 
+join users on review.id_user = users.id_user where review.id_user={session['id']}
+ """
+    sQuery = f""" select products.nombre, products.price, products.id_product from saved_product
+join products on saved_product.id_product=products.id_product
+where saved_product.id_user={session['id']} """
+    try:
+        conn = pyodbc.connect(conn_str)
+        print("Conexión exitosa")
+
+        cursor = conn.cursor()
+
+        cursor.execute(rQuery)
+        reviews = cursor.fetchall()
+        cursor.execute(sQuery)
+        savedProd = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+    except Exception as e:
+            return render_template("error.html", error=e, code=f"img/500.png")
     
-    return render_template("user.html", user=user)
+    return render_template("user.html", user=user, savedProd=savedProd, reviews=reviews)
 
 #Product Route ---------------------------------------------------------------------------------
 @app.route('/product/<id_product>')
@@ -95,6 +120,7 @@ def product(id_product):
     product = {}
 
     post_a = "/post-a-review/" + str(id_product)
+    save = '/save-product/' + str(id_product)
     try:
         conn = pyodbc.connect(conn_str)
         print("Conexión exitosa")
@@ -122,7 +148,7 @@ def product(id_product):
         return render_template("error.html", error=e, code=f"img/404.png")
     
     if 'is_authenticated' in session:
-        return render_template("product.html", product=product, reviews=returnedRev, user=session['is_authenticated'], post=post_a)
+        return render_template("product.html", product=product, reviews=returnedRev, user=session['is_authenticated'], post=post_a, save=save)
     else:
         return render_template("product.html", product=product, reviews=returnedRev, user=False)
     

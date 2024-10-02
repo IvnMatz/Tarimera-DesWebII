@@ -42,7 +42,8 @@
 
 .content {
     margin-top: 70px;
-    padding: 20px;
+    padding-top: 30px ;
+    padding-left: 80px;
 }
 
 .navbar ul li a:hover {
@@ -68,4 +69,90 @@
     width: 800px;
     color: white;
     text-align: center;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+h3, h1 {
+    text-align: justify; /* Para justificar el texto, si es necesario */
+}   
+
+.profile-pic {
+    width: 150px; /* Puedes ajustar el tamaño según sea necesario */
+    height: 150px;
+    border-radius: 50%; /* Esto crea la forma circular */
+    object-fit: cover; /* Para asegurarse de que la imagen no se deforme */
+    border: 3px solid #ddd; /* Un borde opcional */
+
+    float: left;       
+    margin-right: 50px;          
+}
+
+.user-data h1, h2 {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.user-data #id{
+    color: gray;
+}
+
+.user-data #mail{
+    display: block;
+}
+
+.r-s {
+    margin-top: 70px;
+    padding-top: 30px ;
+    padding-left: 80px;
+}
+
+.reviews {
+    width: 48%;
+    height: auto;
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 12px;
+    margin-left: 10px;
+    padding: 15px 10px;
+    vertical-align: top;
+}
+
+.saved {
+    width: 48%;
+    height: auto;
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 12px;
+    padding: 15px 10px;
+    vertical-align: top;
+}
+
+.reviews h3, .saved h3{
+    padding-bottom: 20px;
+}
+
+.reviews .sec{
+    display: inline-block;
+    margin-right: 6px;
+    margin-bottom: 10px;
+}
+
+.review, .save{
+    padding: 6px 6px;
+    margin: 6px 6px;
+    border-radius: 12px;
+    border: 1px solid;
+
+}
+
+.saved a{
+    text-decoration: none;
+    color: black;
+}
+
+.save:hover{
+    background-color: #9CC2D9;
 }
