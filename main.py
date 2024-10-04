@@ -148,9 +148,9 @@ def product(id_product):
         return render_template("error.html", error=e, code=f"img/500.png")
     
     if 'is_authenticated' in session:
-        return render_template("product.html", product=product, reviews=returnedRev, user=session['is_authenticated'], post=post_a, save=save)
+        return render_template("product.html", product=product, reviews=returnedRev, user=session['is_authenticated'], post=post_a, save=save, theme=session['theme'])
     else:
-        return render_template("product.html", product=product, reviews=returnedRev, user=False)
+        return render_template("product.html", product=product, reviews=returnedRev, user=False, theme=0)
     
 
 # ADMIN PAGE ROUTE -----------------------------------------------------------------------------
