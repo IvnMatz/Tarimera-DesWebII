@@ -142,3 +142,22 @@ def upload_product():
         return jsonify({'message' : 'subido'})
     else:
         return jsonify({'message' : 'problem'})
+
+@rutas_bp.route('/c-theme', methods=['POST'])
+def c_theme():
+    if session['theme'] == 1:
+        session['theme'] = 0
+    elif session['theme'] == 0:
+        session['theme'] = 1
+
+    try:
+        conn = pyodbc.connect(conn_str)
+        cursor = conn.cursor()
+        cursor.execute(f"UPDATE users SET theme={session['theme']} where id_user={session['id']}")
+        cursor.commit()
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        abort(500)
+    
+    return jsonify({'message' : 'cambiao'})

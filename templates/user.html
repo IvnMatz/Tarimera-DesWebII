@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if theme == 0 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/userS.css') }}">
+    {% else %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='darkStyles/userSD.css') }}">
+    {% endif %}
     <title>Perfil</title>
 </head>
 <body>
@@ -15,6 +19,13 @@
         <div class="user-data">
             <h1> {{ user.username }} <h2 id="id"> #{{ user.id }} </h2> </h1>
             <h2 id="mail"> {{ user.mail }} </h2>
+            <form action="/c-theme" method="POST" class="themeB" id="ctheme">
+                {% if theme == 0 %}
+                    <button type="submit" > Modo oscuro </button>
+                {% else %}
+                    <button type="submit" > Modo Claro </button>
+                {% endif %}
+            </form>
         </div>
 
     </div>
@@ -58,6 +69,8 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ url_for('static', filename='js/c-theme.js') }}"></script>
     
 </body>
 </html>

@@ -40,10 +40,13 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
+    color: white;
+    background-color:#010409
 }
 
 .navbar {
-    background-color: #9CC2D9;
+    background-color: #151B23;
+    border: 1px lightgray ;
     overflow: hidden;
     position:fixed;
     top: 0%;
@@ -69,7 +72,7 @@
 
 .navbar ul li a {
     display: inline-block;
-    color: black;
+    color: white;
     text-align: center;
     padding: 14px 20px;
     text-decoration: none;
@@ -85,8 +88,8 @@
 }
 
 .navbar ul li a:hover {
-    background-color: #000000;
-    color: white;
+    background-color: white;
+    color: rgb(0, 0, 0);
 }
 
 .navbar ul li input{
@@ -94,8 +97,8 @@
     width: 500px;
     height: 30px;
     border-radius: 13px;
-    background-color: #9CC2D9;
-    color: black;
+    background-color: #010409;
+    color: white;
     transition: 0.25s ;
 }
 
@@ -151,11 +154,20 @@ h3, h1 {
     width: 48%;
     height: auto;
     display: inline-block;
-    border: 1px solid;
+    border: 1px solid lightgray;
+    color: white;
     border-radius: 12px;
     margin-left: 10px;
     padding: 15px 10px;
     vertical-align: top;
+}
+
+.review *{
+    background-color: #151B23;
+}
+
+.review{
+    background-color: #151B23;
 }
 
 .saved {
@@ -178,6 +190,14 @@ h3, h1 {
     margin-bottom: 10px;
 }
 
+.prod *{
+    background-color: #151B23;
+}
+
+.prod{
+    background-color: #151B23;
+}
+
 .review, .save{
     padding: 6px 6px;
     margin: 6px 6px;
@@ -188,17 +208,17 @@ h3, h1 {
 
 .saved a{
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
-.save:hover{
-    background-color: #9CC2D9;
+.prod:hover *, .prod:hover{
+    background-color: #0d82cf;
 }
 
 .themeB button{
-    background-color: white;
-    color: black;
-    border: 1px solid black;
+    background-color: #151B23;
+    color: white;
+    border: 1px solid lightgray;
     display: block;
     border-radius: 12px;
     width: 120px;
@@ -209,7 +229,7 @@ h3, h1 {
 }
 
 .themeB button:hover{
-    background-color: #9CC2D9;
+    background-color: #0d82cf;
+    color: white;
     width: 150px;
 }
-

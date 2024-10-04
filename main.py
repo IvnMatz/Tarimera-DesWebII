@@ -2,8 +2,7 @@ import pyodbc
 from flask import Flask, request, render_template, session, redirect, url_for, abort
 from handleErrors import error_handlers_bp
 from postEp import rutas_bp
-import os
-from vFunctions import processor, allowed_file
+from vFunctions import processor
 
 UPLOAD_FOLDER = 'static/Uploaded_img'
 
@@ -112,7 +111,8 @@ where saved_product.id_user={session['id']} """
     except Exception as e:
             return render_template("error.html", error=e, code=f"img/500.png")
     
-    return render_template("user.html", user=user, savedProd=savedProd, reviews=reviews)
+    if 'is_authenticated' in session:
+        return render_template("user.html", user=user, savedProd=savedProd, reviews=reviews, theme=session['theme'])
 
 #Product Route ---------------------------------------------------------------------------------
 @app.route('/product/<id_product>')
@@ -161,7 +161,7 @@ def admin():
     else:
         print(session)
         if session['id'] == 0:
-            return render_template("admin.html", user=True)
+            return render_template("admin.html", user=True, theme=session['theme'])
         else:
             abort(403)
 
