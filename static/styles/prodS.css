@@ -296,6 +296,28 @@
     display: inline;
 }
 
+.first {
+    display: block;
+}
+
+.product-data .fR{
+    display: inline-block;
+}
+
+.fR button{
+    margin-left: 23px;
+    vertical-align:auto;
+    height: 40px;
+    width: 40px;
+    background: white;
+    border: 1px solid;
+    border-radius: 5px;
+    outline: none;
+}
+
+.fR button:hover{
+    background-color:#236591;
+}
 
 
 

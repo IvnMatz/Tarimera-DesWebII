@@ -3,12 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/adminS.css') }}">
     <title>Panel Admin</title>
 </head>
 <body>
-    <form action="/upload_file" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Subir">
-    </form>
+
+    {% include 'navbar.html' %}
+
+    <div class="content">
+
+        <h1> Página de Administrador </h1>
+
+        <div class="add-product">
+            <details class="det-add">
+                <summary class="sum"> Agregar producto </summary>
+                <form action="/upload_product" method="POST" enctype="multipart/form-data" id="upload">
+                    <input type="text" placeholder="Nombre" name="nombre" class="fR">
+                    <input type="text" placeholder="Precio" name="precio" class="fR">
+                    <input type="text" placeholder="dimensiones" name="dimen" class="fR">
+                    <input type="text" placeholder="peso" name="peso" class="fR"> 
+                    <textarea cols="50" rows="4" placeholder="Descripción" name="desc"></textarea>
+                    <input type="file" name="file">
+                    <input type="submit" value="Subir">
+                </form>
+            </details>
+            
+        </div>
+
+        
+    </div>
+
+    <script src="{{ url_for('static', filename='js/upProd.js') }}"></script>
+
+    
 </body>
 </html>

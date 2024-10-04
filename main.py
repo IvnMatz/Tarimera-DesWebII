@@ -145,7 +145,7 @@ def product(id_product):
             abort(404)
 
     except Exception as e:
-        return render_template("error.html", error=e, code=f"img/404.png")
+        return render_template("error.html", error=e, code=f"img/500.png")
     
     if 'is_authenticated' in session:
         return render_template("product.html", product=product, reviews=returnedRev, user=session['is_authenticated'], post=post_a, save=save)
@@ -161,28 +161,12 @@ def admin():
     else:
         print(session)
         if session['id'] == 0:
-            return render_template("admin.html")
+            return render_template("admin.html", user=True)
         else:
             abort(403)
 
 #UPLOAD ROUTE (POST)-----------------------------------------------------------------------------
-@app.route('/upload_file', methods=['POST'])
-def upload_file():
-    if 'is_authenticated' not in session:
-        return "No se tiene una sesión iniciada"
-    if session['id'] != 0:
-        return "No se tiene permisos para acceder a esta ruta"
 
-    if "file" not in request.files:
-            return "No se encontró ningún archivo"
-        
-    file = request.files['file']
-    if file and allowed_file(file.filename):
-        filename = file.filename
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return "Archivo subido"
-    else:
-        return "Archivo no aceptado"
     
 # SEARCH ROUTE ----------------------------------------------------------------------------------
 @app.route('/search/<search_term>', methods=['GET'])
@@ -201,8 +185,11 @@ def search(search_term):
     except Exception as e:
         return render_template("error.html", error=e, code=f"img/404.png")
     
+    if 'is_authenticated' in session:
+        return render_template('searched.html', SearchTerm=pSearchT, products=returnedP, user= 'is_authenticated' in session, theme=session['theme'])
+    else:
+        return render_template("searched.html", SearchTerm=pSearchT, products=returnedP, user=False, theme=0)
     
-    return render_template('searched.html', SearchTerm=pSearchT, products=returnedP, user= 'is_authenticated' in session)
 
 #logout route (Redirects to index) --------------------------------------------------------------
 @app.route('/logout')

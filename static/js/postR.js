@@ -53,10 +53,7 @@ document.getElementById('form').addEventListener('submit', async function (event
   
       // Verifica la respuesta para mostrar una alerta
       if(result.message){
-      if (result.message === 'Vacia') {
-        alert('No se puede envíar una reseña vacia');
-      }
-      else if (result.message === 'saved' ){
+       if (result.message === 'saved' ){
         location.reload();
       }
     }

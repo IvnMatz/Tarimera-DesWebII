@@ -13,11 +13,15 @@
         <img src="{{ url_for('static', filename='Uploaded_img/' + product.id|string + '.png') }}">
 
         <div class="product-data">
-            <h1> {{ product.name }} </h1>
-            <form action="{{ save }}" method="POST" id="save">
-                <button type="submit"> Guardar </button>
+            <div class="first">
+            <h1 class="fR"> {{ product.name }} </h1>
+            {% if user %}
+            <form action="{{ save }}" method="POST" id="save" class="fR">
+                <button type="submit"> 📂 </button>
             </form>
-            <h2 #="peso"> $ </h2> <h2> {{ product.precio }} </h2>
+            {% endif %}
+            </div>
+            <h2 id="peso"> $ </h2> <h2> {{ product.precio }} </h2>
             <h3> {{ product.desc }} </h3>
             <table border="1">
                 <thead>

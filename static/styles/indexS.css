@@ -1,7 +1,45 @@
+/* FONTS */
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_28pt-SemiBold.ttf') format('ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Light.ttf') format('ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-LightItalic.ttf') format('ttf');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_28pt-SemiBoldItalic.ttf') format('ttf');
+    font-weight:700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'InterB';
+    src: url('../fonts/Inter_18pt-Bold.ttf') format('ttf');
+    font-weight:700;
+    font-style: normal;
+}
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 .navbar {
