@@ -7,7 +7,7 @@
     {% if theme == 0 %}
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/indexS.css') }}">
     {% else %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/indexSD.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='darkStyles/indexSD.css') }}">
     {% endif %}
 </head>
 <body>
@@ -18,7 +18,6 @@
                 <input type="search" name="search" placeholder="🔎 Buscar" autocomplete="off"> 
                 <button type="submit" style="opacity: 0;"></button> 
                </form> </li>
-            <li> <a href="#about"> Acerca de </a> </li>
         {% if user %}
             <li><a href="http://localhost:5000/user"> Perfil </a></li>
             <li> <a href="http://localhost:5000/logout"> Cerrar Sesión </a> </li>
@@ -34,9 +33,9 @@
             <div class="pr" id="about">
                 <div class="presentation">
                     <div class="text-pr">
-                    <h1> Tarimera </h1>
-                    <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt minus dolorum maxime quod quasi minima placeat in, obcaecati eaque nulla aspernatur perferendis dicta voluptatum soluta aliquid tempore saepe facere. Debitis! </p>
-                    <a> Contactanos </a>
+                    <h1> Tarimera 5 estrellas</h1>
+                    <p> <b>Tarimera 5 estrellas</b> es una empresa con más de 15 años de experiencia en la fabricación y <b>distribución de tarimas de alta calidad</b>, enfocada en soluciones sostenibles y personalizadas para diversos sectores. Utilizamos madera certificada y procesos eficientes, asegurando durabilidad y cumplimiento con los más altos estándares. Ofrecemos una amplia variedad de tarimas, además de servicios de personalización, reciclaje y mantenimiento. <b>Nos comprometemos con la satisfacción del cliente</b>, garantizando entregas puntuales y un soporte técnico especializado.</p>
+                    <a href="#contact"> Contactanos </a>
                 </div>
                 <img src="{{ url_for('static', filename='img/Tarima.png') }}" class="imgf">
                 </div>
@@ -60,6 +59,20 @@
                         {% endif %}
                     </div>
             </div>
+        </div>
+
+        <div class="contact" id="contact">
+            <h2> Contactanos </h2>
+            <form>
+                <div class="firstR">
+                <input type="text" placeholder="Nombre" name="name">
+                <input type="text" placeholder="Email" name="mail">
+                </div>
+                <input type="text" placeholder="Empresa" name="enterprise">
+                <input type="tel" placeholder="Telefono" name="tel">
+                <textarea type="text" placeholder="Mensaje" name="message"></textarea>
+                <button type="submit" > Enviar </button>
+            </form>
         </div>
 
 
