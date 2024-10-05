@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if theme==0 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/searchS.css') }}">
+    {% else %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='darkStyles/searchSD.css') }}">
+    {% endif %}
     <title>Resultados para {{ SearchTerm }}</title>
 </head>
 <body>
@@ -17,7 +21,7 @@
                     {% for fila in products|batch(3) %}
                         <div class="fila">
                             {% for product in fila %}
-                            <a href="http://localhost:5000/product/{{ product[0] }}">
+                            <a href="http://localhost:5000/product/{{ product[0] }}" class="product">
                                 <div class="product">
                                     <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
                                     <h2> {{ product[1] }} </h2>
