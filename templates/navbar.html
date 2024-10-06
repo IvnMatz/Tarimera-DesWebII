@@ -6,8 +6,12 @@
          <button type="submit" style="opacity: 0;"></button> 
         </form> </li>
 {% if user %}
+    {% if user.id == 0 %}
+    <li><a href="http://localhost:5000/admin"> Admin </a></li>
+    {% endif %}
     <li><a href="http://localhost:5000/user"> Perfil </a></li>
     <li> <a href="http://localhost:5000/logout"> Cerrar Sesión </a> </li>
+    
 {% else %}
     <li><a href="http://localhost:5000/login" > Iniciar Sesión </a></li>
     <li><a href="http://localhost:5000/register" > Registrar Usuario </a></li>

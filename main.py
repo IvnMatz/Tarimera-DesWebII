@@ -36,7 +36,7 @@ def index():
         return render_template("error.html", error=e, code=f"img/500.png")
 
     if 'is_authenticated' in session:
-        return render_template('index.html', user=session['is_authenticated'], theme=session['theme'], products=returnedProd)
+        return render_template('index.html', user=session, theme=session['theme'], products=returnedProd)
     else:
         return render_template('index.html', user=False, theme=0, products=returnedProd)
     
@@ -118,6 +118,7 @@ where saved_product.id_user={session['id']} """
 @app.route('/product/<id_product>')
 def product(id_product):
     product = {}
+    calif = {}
 
     post_a = "/post-a-review/" + str(id_product)
     save = '/save-product/' + str(id_product)
@@ -131,6 +132,30 @@ def product(id_product):
         # 0=ID 1=name 2=precio 3=descript 4=dimension 5=peso
         cursor.execute(f"select users.username, review.* from review join users on review.id_user=users.id_user join products on review.id_product=products.id_product where products.id_product={id_product}")
         returnedRev = cursor.fetchall()
+
+        if returnedRev:
+            cursor.execute(f"SELECT sum(calif), count(id_review) from review where id_product = {id_product}")
+            starsC = cursor.fetchall()
+            calif['sum'] = starsC[0][0]
+            calif['avg'] = round(starsC[0][0] / starsC[0][1], 2)
+            cursor.execute(f" SELECT count(id_review) from review where id_product={id_product} AND calif=5")
+            rol = cursor.fetchall()
+            calif['Fstarsper'] = round(( rol[0][0] / starsC[0][1] ) * 100)
+            cursor.execute(f" SELECT count(id_review) from review where id_product={id_product} AND calif=4")
+            rol = cursor.fetchall()
+            calif['Fostarsper'] = round(( rol[0][0] / starsC[0][1] ) * 100)
+            cursor.execute(f" SELECT count(id_review) from review where id_product={id_product} AND calif=3")
+            rol = cursor.fetchall()
+            calif['Tstarsper'] = round(( rol[0][0] / starsC[0][1] ) * 100)
+            cursor.execute(f" SELECT count(id_review) from review where id_product={id_product} AND calif=2")
+            rol = cursor.fetchall()
+            calif['Tostarsper'] = round(( rol[0][0] / starsC[0][1] ) * 100)
+            cursor.execute(f" SELECT count(id_review) from review where id_product={id_product} AND calif=1")
+            rol = cursor.fetchall()
+            calif['Ostarsper'] = round(( rol[0][0] / starsC[0][1] ) * 100)
+        else:
+            calif = False
+
         cursor.close()
         conn.close()
         
@@ -148,9 +173,9 @@ def product(id_product):
         return render_template("error.html", error=e, code=f"img/500.png")
     
     if 'is_authenticated' in session:
-        return render_template("product.html", product=product, reviews=returnedRev, user=session['is_authenticated'], post=post_a, save=save, theme=session['theme'])
+        return render_template("product.html", product=product, reviews=returnedRev, user=session, post=post_a, save=save, theme=session['theme'], calif=calif)
     else:
-        return render_template("product.html", product=product, reviews=returnedRev, user=False, theme=0)
+        return render_template("product.html", product=product, reviews=returnedRev, user=False, theme=0, calif=calif)
     
 
 # ADMIN PAGE ROUTE -----------------------------------------------------------------------------
@@ -161,7 +186,7 @@ def admin():
     else:
         print(session)
         if session['id'] == 0:
-            return render_template("admin.html", user=True, theme=session['theme'])
+            return render_template("admin.html", user=session, theme=session['theme'])
         else:
             abort(403)
 
@@ -186,7 +211,7 @@ def search(search_term):
         return render_template("error.html", error=e, code=f"img/404.png")
     
     if 'is_authenticated' in session:
-        return render_template('searched.html', SearchTerm=pSearchT, products=returnedP, user= 'is_authenticated' in session, theme=session['theme'])
+        return render_template('searched.html', SearchTerm=pSearchT, products=returnedP, user=session, theme=session['theme'])
     else:
         return render_template("searched.html", SearchTerm=pSearchT, products=returnedP, user=False, theme=0)
     

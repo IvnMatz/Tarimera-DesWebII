@@ -60,7 +60,8 @@
                 </form>
             </div>
         {% endif %}
-        <div class="reviewL">
+        <div>
+        <div class="reviewL" id="rev">
             <h3> Lista de reseñas: </h3>
         {% if reviews %}
             <ul>
@@ -78,7 +79,23 @@
         {% else %}
             <h3> No hay reseñas aún </h3>
         {% endif %}
-    </div>
+        </div>
+
+        <div class="starC" id="rev">
+            <h3> Calificaciones del Producto </h3>
+            {% if reviews %}
+            <h4> {{ calif.avg }} de 5 🌟 </h4>
+            <h4> {{ calif.sum }} reseñas </h4>
+            <h5> 5 Estrellas {{ calif.Fstarsper }} %</h5>
+            <h5> 4 Estrellas {{ calif.Fostarsper }} %</h5>
+            <h5> 3 Estrellas {{ calif.Tstarsper }} %</h5>
+            <h5> 2 Estrellas {{ calif.Tostarsper }} %</h5>
+            <h5> 1 Estrella {{ calif.Ostarsper }} %</h5>
+            {% else %}
+            <h4> Aún no hay reseñas </h4>
+            {% endif %}
+        </div>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/postR.js') }}"></script>
