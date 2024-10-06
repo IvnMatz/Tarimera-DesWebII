@@ -136,7 +136,7 @@ def product(id_product):
         if returnedRev:
             cursor.execute(f"SELECT sum(calif), count(id_review) from review where id_product = {id_product}")
             starsC = cursor.fetchall()
-            calif['sum'] = starsC[0][0]
+            calif['sum'] = starsC[0][1]
             calif['avg'] = round(starsC[0][0] / starsC[0][1], 2)
             cursor.execute(f" SELECT count(id_review) from review where id_product={id_product} AND calif=5")
             rol = cursor.fetchall()
