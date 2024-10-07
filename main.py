@@ -73,7 +73,7 @@ def login():
                 session['theme'] = returnedUser[0][5]
                 return redirect(url_for('index'))
             else:
-                return 'Usuario o contraseña Mal ingresados'
+                return redirect(url_for('login'))
 
         except Exception as e:
             return render_template("error.html", error=e, code=f"img/500.png")
