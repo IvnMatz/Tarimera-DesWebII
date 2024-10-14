@@ -1,10 +1,12 @@
 <header>
 <nav class="navbar">
     <ul>
+    
     <li> <form action="/search-p" method="POST">
          <input type="search" name="search" placeholder="🔎 Buscar" autocomplete="off"> 
          <button type="submit" style="opacity: 0;"></button> 
         </form> </li>
+    <li><a href="http://localhost:5000" > Página principal </a></li>
 {% if user %}
     {% if user.id == 0 %}
     <li><a href="http://localhost:5000/admin"> Admin </a></li>

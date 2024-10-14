@@ -196,7 +196,6 @@ def admin():
 # SEARCH ROUTE ----------------------------------------------------------------------------------
 @app.route('/search/<search_term>', methods=['GET'])
 def search(search_term):
-    result = {}
     pSearchT = processor(search_term)
 
     try:

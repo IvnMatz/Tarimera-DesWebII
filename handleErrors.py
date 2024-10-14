@@ -7,7 +7,7 @@ def page_not_found(e):
     return render_template("error.html", error=f"{e.code} {e.description}", code=f"img/{e.code}.png"), 404
 
 @error_handlers_bp.app_errorhandler(403)
-def page_not_found(e):
+def no_perms(e):
     return render_template("error.html", error=f"{e.code} {e.description}", code=f"img/{e.code}.png"), 403
 
 @error_handlers_bp.app_errorhandler(451)
