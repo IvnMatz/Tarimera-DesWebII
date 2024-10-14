@@ -1,114 +1,11 @@
-/* FONTS */
-@font-face {
-    font-family: 'Inter';
-    src: url('../fonts/Inter_28pt-SemiBold.ttf') format('ttf');
-    font-weight: 700;
-    font-style: normal;
-}
 
-@font-face {
-    font-family: 'Inter';
-    src: url('../fonts/Inter_18pt-Light.ttf') format('ttf');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Inter';
-    src: url('../fonts/Inter_18pt-LightItalic.ttf') format('ttf');
-    font-weight: 400;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Inter';
-    src: url('../fonts/Inter_28pt-SemiBoldItalic.ttf') format('ttf');
-    font-weight:700;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'InterB';
-    src: url('../fonts/Inter_18pt-Bold.ttf') format('ttf');
-    font-weight:700;
-    font-style: normal;
-}
-
-.navbar {
-    background-color: #9CC2D9;
-    overflow: hidden;
-    position:fixed;
-    top: 0%;
-    left: 0%;
-    width:100%;
-    z-index: 1000;
-}
-
-.navbar form{
-    display: inline-block;
-}
-
-.navbar ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    text-align: right;
-}
-
-.navbar ul li {
-    display: inline;
-}
-
-.navbar ul li a {
-    display: inline-block;
-    color: black;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-    font-size: 17px;
-
-    transition: 0.2s;
-}
 
 .content {
     margin-top: 70px;
     padding: 20px;
 }
 
-.navbar ul li a:hover {
-    background-color: #000000;
-    color: white;
-}
-
-.navbar ul li input{
-    display:inline-block;
-    width: 500px;
-    height: 30px;
-    border-radius: 13px;
-    background-color: #9CC2D9;
-    color: black;
-    transition: 0.25s ;
-}
-
-.navbar ul li input::placeholder { 
-    text-align: center;
-}
-
-.navbar ul li input:hover, .navbar ul li input:focus{
-    width: 800px;
-    color: white;
-    text-align: center;
-}
-
 /* CSS DEL CONTENT */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
-    font-family: 'Inter', sans-serif;
-}
 
 .results{
     margin-left: 20px;
