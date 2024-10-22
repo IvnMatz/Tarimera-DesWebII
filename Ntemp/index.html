@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/navS.css') }}">
+    {% if theme == 0 %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/indexS.css') }}">
+    {% else %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='darkStyles/indexSD.css') }}">
+    {% endif %}
+    
+    
+    <link rel="icon" href="{{ url_for('static', filename='icons/icon.png') }}" type="image/x-icon">
+</head>
+<body>
+    
+        {% include 'navbar.html' %}
+
+        <div class="content">
+            <div class="pr" id="about">
+                <div class="presentation">
+                    <div class="text-pr">
+                    <h1> Tarimera 5 estrellas</h1>
+                    <p> <b>Tarimera 5 estrellas</b> es una empresa con más de 15 años de experiencia en la fabricación y <b>distribución de tarimas de alta calidad</b>, enfocada en soluciones sostenibles y personalizadas para diversos sectores. Utilizamos madera certificada y procesos eficientes, asegurando durabilidad y cumplimiento con los más altos estándares. Ofrecemos una amplia variedad de tarimas, además de servicios de personalización, reciclaje y mantenimiento. <b>Nos comprometemos con la satisfacción del cliente</b>, garantizando entregas puntuales y un soporte técnico especializado.</p>
+                    <a href="#contact"> Contactanos </a>
+                </div>
+                <img src="{{ url_for('static', filename='img/Tarima.png') }}" class="imgf">
+                </div>
+            </div>
+            
+            <div class="productL">
+                <h1> Productos Destacados </h1>
+                    <div class="productList">
+                        {% if products %}
+                            {% for product in products %}
+                            <a href="http://localhost:5000/product/{{ product[0] }}">
+                                <div class="product">
+                                     <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
+                                     <h3> {{ product[1] }} </h3>
+                                    <p> $ {{ product[2] }} </p>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        {% else %}
+                            <h3> Aún no hay productos </h3>
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+
+        <div class="contact" id="contact">
+            <h2> Contactanos </h2>
+            <form>
+                <div class="firstR">
+                <input type="text" placeholder="Nombre" name="name">
+                <input type="text" placeholder="Email" name="mail">
+                </div>
+                <input type="text" placeholder="Empresa" name="enterprise">
+                <input type="tel" placeholder="Telefono" name="tel">
+                <textarea type="text" placeholder="Mensaje" name="message"></textarea>
+                <button type="submit" > Enviar </button>
+            </form>
+        </div>
+
+
+        
+</body>
+</html>

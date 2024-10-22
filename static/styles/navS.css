@@ -1,4 +1,3 @@
-/* FONTS */
 @font-face {
     font-family: 'Inter';
     src: url('../fonts/Inter_28pt-SemiBold.ttf') format('ttf');
@@ -34,64 +33,81 @@
     font-style: normal;
 }
 
+/* NAVBAR STYLES */
 .navbar {
-    background-color: #9CC2D9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    background-color: white;
+    border: 1px solid transparent;
     overflow: hidden;
     position:fixed;
     top: 0%;
     left: 0%;
     width:100%;
     z-index: 1000;
-}
-
-.navbar form{
-    display: inline-block;
-}
-
-.navbar ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    text-align: right;
-}
-
-.navbar ul li {
-    display: inline;
-}
-
-.navbar ul li a {
-    display: inline-block;
-    color: black;
-    text-align: center;
+  }
+  
+  /* Estilo para los enlaces */
+.navbar a {
+    color: rgb(0, 0, 0);
     padding: 14px 20px;
     text-decoration: none;
-    font-size: 17px;
-
+    text-align: center;
     transition: 0.2s;
+    width: auto;
+    height: auto;
+    border: 1px solid transparent;
+    border-radius: 7px;
 }
 
-.navbar ul li a:hover {
-    background-color: #000000;
-    color: white;
+.left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
 }
 
-.navbar ul li input{
-    display:inline-block;
+.center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navbar a:hover{
+    background-color: #EAD7BB;
+    color: rgb(0, 0, 0);
+    border: 1px solid transparent;
+    transition: 0.1s;
+}
+
+.navbar .center form{
+    display: flex;
+    align-items: center;
+}
+
+.navbar input{
+    display:flex;
     width: 500px;
     height: 30px;
     border-radius: 13px;
-    background-color: #9CC2D9;
     color: black;
     transition: 0.25s ;
 }
 
-.navbar ul li input::placeholder { 
+.navbar input::placeholder { 
     text-align: center;
 }
 
-.navbar ul li input:hover, .navbar ul li input:focus{
-    width: 800px;
-    color: white;
+.navbar input:hover, .navbar ul li input:focus{
+    width: 520px;
+    color: black;
     text-align: center;
 }
 
@@ -99,7 +115,5 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
     font-family: 'Inter', sans-serif;
 }
-

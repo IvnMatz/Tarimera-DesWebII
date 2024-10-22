@@ -35,219 +35,155 @@
 }
 
 
-* {
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
 }
 
-.navbar {
-    background-color: #9CC2D9;
-    overflow: hidden;
-    position:fixed;
-    top: 0%;
-    left: 0%;
-    width:100%;
-    z-index: 1000;
-}
-
-.navbar form{
-    display: inline-block;
-}
-
-.navbar ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    text-align: right;
-}
-
-.navbar ul li {
-    display: inline;
-}
-
-.navbar ul li a {
-    display: inline-block;
-    color: black;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-    font-size: 17px;
-
-    transition: 0.2s;
-}
-
 .content {
     margin-top: 70px;
     padding: 20px;
-}
 
-.navbar ul li a:hover {
-    background-color: #000000;
-    color: white;
-}
-
-.navbar ul li input{
-    display:inline-block;
-    width: 500px;
-    height: 30px;
-    border-radius: 13px;
-    background-color: #9CC2D9;
-    color: black;
-    transition: 0.25s ;
-}
-
-.navbar ul li input::placeholder { 
-    text-align: center;
-}
-
-.navbar ul li input:hover, .navbar ul li input:focus{
-    width: 800px;
-    color: white;
-    text-align: center;
-}
-
-.pr {
-    display: flex;
+    width: 100%;
+    height: 500px;
+    background-image: url('../img/backg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
-.presentation {
-    width: 1200px;
-    height: 600px;
-    border-radius: 20px;
-    align-content: center;
-    padding:150px;
-    background-color: #B9D4E4;
-    border: 2px solid black;
-
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    transition: 0.2s;
+.prT a{
+    text-decoration: none;
+    color: white;
+    padding: 10px 10px;
+    border: 1px solid white;
+    
 }
 
-.text-pr {
-    max-width: 60%;
-    float: left;
+.prT a:hover{
+    color: black;
+    background-color: #BCA37F;
+    text-shadow: 0px 0px 0px;
 }
 
-.text-pr h1{
-    margin-bottom: 40px;
-    font-size: 50px;
+.prT {
+    margin-top: 110px;
+    margin-left: 220px;
 }
 
-.text-pr p{
-    font-size: 20px;
+.prT h1{
+    font-size: 60px;
 }
 
 .imgf {
-    max-width: 40%; 
-    height: auto; 
-    float: right;       
-    margin-left: 20px;  
-    width: 300px;        
-    height: auto;
+    float: right;         /* Hace que la imagen flote a la izquierda */
+    margin-right: 200px;  /* Espacio entre la imagen y el texto */
+    width: 300px;        /* Ancho de la imagen */
+    height: auto;        /* La altura se ajusta proporcionalmente */
+    margin-top: 50px;
 }
 
+/* PRODUCTS STYLES */
 
-.presentation a{
-    color:black;
+.products{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    align-items: center;
+    text-align: center;
+}
+
+.products a{
+    color: black;
     text-decoration: none;
-    border:2px solid black;
-    transition: 0.25s;
-    padding: 10px 20px; 
-    display: inline-block;
-    margin-top: 20px;
-
-}
-.presentation a:hover{
-    color: white;
-    background-color: black;
-    border-radius: 15px;
-}
-
-.product {
-    display: inline-block; /* Alinea los divs horizontalmente */
-    padding: 20px;
-    margin: 10px;
-
-    width: 300px;
-    height: 200px;
-    border: 2px solid;
-    border-radius: 20px;
-    transition: 0.2s;
 }
 
 .product:hover{
-    width: 340px;
-    background-color: #9CC2D9;
+    background-color: #BCA37F;
 }
 
-.productList a{
-    text-decoration: none;
-    color: black;
+
+.product {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 250px;
+    padding: 20px 20px;
+    margin: 20px;
+    height: 300px;
+    transition: 0.2s;
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.product *{
+    margin-bottom: 10px;
+}
+
+.products #t{
+    font-size: 30px;
+    margin-bottom: 20px;
 }
 
 .product img{
-    width: 100px;
-    height: 100px;
-
-    align-self: center;
+    width: 80%;
+    height: 60%;
+    margin: 15px;
 }
 
-.productL {
-    margin-top: 30px;
-    margin-left: 50px;
-}
+/* CONTACT STYLES */
 
-.productL h1{
-    margin-bottom: 30px;
-    margin-left: 10px;
-    font-family: sans-serif;
-}
-
-.productList {
-    margin-left: 30px;
-}
-
-.contact {
-    width: 1000px;
+.contact{
+    width: 100%;
     height: auto;
-    border-radius: 20px;
-    border: 2px solid;
-    margin: 20px 150px;
-    outline: none;
-    align-content: center;
-    padding-left: 150px;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    background-color: #b6d3e6;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url('../img/back-c.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 70px;
+    padding: 20px;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
-
-.contact input{
-    border-radius: 7px;
-    padding: 10px 10px;
-    border: 1px solid;
-    margin: 10px 10px;
-}
-
-.contact .firstR{
-    display: block;
-}
-
-.contact textarea{
-    display: block;
+.contact form{
+    background-color: #BCA37F;
     width: 60%;
-    height: 100px;
-    padding: 10px 10px;
-    border: 1px solid;
-    margin: 10px 10px;
+    height: auto;
+    padding: 40px 40px;
+    border-radius: 10px;
+    margin-left: 250px;
+    text-align: center;
 }
 
+.contact .firstR *, .secondR *, .contact textarea{
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.contact button{
+    display: block;
+}
 
 

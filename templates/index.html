@@ -4,68 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
-    {% if theme == 0 %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/indexS.css') }}">
-    {% else %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='darkStyles/indexSD.css') }}">
-    {% endif %}
-    
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/navS.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/indexS.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='icons/icon.png') }}" type="image/x-icon">
 </head>
 <body>
     
-        <nav class="navbar">
-            <ul>
-            <li> <form action="/search-p" method="POST">
-                <input type="search" name="search" placeholder="🔎 Buscar" autocomplete="off"> 
-                <button type="submit" style="opacity: 0;"></button> 
-               </form> </li>
-        {% if user %}
-            {% if user.id == 0 %}
-            <li><a href="http://localhost:5000/admin"> Admin </a></li>
-            {% endif %}
-            <li><a href="http://localhost:5000/user"> Perfil </a></li>
-            <li> <a href="http://localhost:5000/logout"> Cerrar Sesión </a> </li>
-            
-        {% else %}
-            <li><a href="http://localhost:5000/login" > Iniciar Sesión </a></li>
-            <li><a href="http://localhost:5000/register" > Registrar Usuario </a></li>
-        {% endif %}
-            
-            </ul>
-        </nav>
+        {% include 'navbar.html' %}
 
         <div class="content">
-            <div class="pr" id="about">
-                <div class="presentation">
-                    <div class="text-pr">
-                    <h1> Tarimera 5 estrellas</h1>
-                    <p> <b>Tarimera 5 estrellas</b> es una empresa con más de 15 años de experiencia en la fabricación y <b>distribución de tarimas de alta calidad</b>, enfocada en soluciones sostenibles y personalizadas para diversos sectores. Utilizamos madera certificada y procesos eficientes, asegurando durabilidad y cumplimiento con los más altos estándares. Ofrecemos una amplia variedad de tarimas, además de servicios de personalización, reciclaje y mantenimiento. <b>Nos comprometemos con la satisfacción del cliente</b>, garantizando entregas puntuales y un soporte técnico especializado.</p>
-                    <a href="#contact"> Contactanos </a>
-                </div>
+            <div class="prI">
                 <img src="{{ url_for('static', filename='img/Tarima.png') }}" class="imgf">
-                </div>
             </div>
-            
-            <div class="productL">
-                <h1> Productos Destacados </h1>
-                    <div class="productList">
-                        {% if products %}
-                            {% for product in products %}
-                            <a href="http://localhost:5000/product/{{ product[0] }}">
-                                <div class="product">
-                                     <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
-                                     <h3> {{ product[1] }} </h3>
-                                    <p> $ {{ product[2] }} </p>
-                                </div>
-                            </a>
-                            {% endfor %}
-                        {% else %}
-                            <h3> Aún no hay productos </h3>
-                        {% endif %}
-                    </div>
+            <div class="prT">
+                <h1> Venta de</h1>
+                <h1> tarimas de</h1>
+                <h1>alta calidad </h1>
+                <a href="#contact"> Contactanos </a>
             </div>
         </div>
+
+        <div class="ProdL">
+            <div class="products">
+                <h3 id="t"> Productos Destacados </h3>
+                {% if products %}
+                    {% for product in products %}
+                        <a href="http://localhost:5000/product/{{ product[0] }}">
+                            <div class="product">
+                                <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
+                                <h3> {{ product[1] }} </h3>
+                                <p> $ {{ product[2] }} </p>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <h3> Aún no hay productos </h3>
+                {% endif %}
+            </div>
+        </div>
+        
 
         <div class="contact" id="contact">
             <h2> Contactanos </h2>
@@ -74,13 +51,15 @@
                 <input type="text" placeholder="Nombre" name="name">
                 <input type="text" placeholder="Email" name="mail">
                 </div>
+                <div class="secondR">
                 <input type="text" placeholder="Empresa" name="enterprise">
                 <input type="tel" placeholder="Telefono" name="tel">
+                </div>
                 <textarea type="text" placeholder="Mensaje" name="message"></textarea>
                 <button type="submit" > Enviar </button>
             </form>
         </div>
-
+            
 
         
 </body>

@@ -26,7 +26,7 @@ def registerN():
         cursor.execute("SELECT max(id_user) from users")
         MaxID = cursor.fetchall()
         newID = int(MaxID[0][0]) + 1
-        cursor.execute(f"INSERT INTO users VALUES({newID}, \'{username}\', \'{password}\', \'{mail}\', \'ES\', 0)")
+        cursor.execute(f"INSERT INTO users VALUES({newID}, \'{username}\', \'{password}\', \'{mail}\', 0)")
         conn.commit()
 
         cursor.close()
