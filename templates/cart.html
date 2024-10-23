@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/navS.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/cartS.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='icons/icon.png') }}" type="image/x-icon">
+    <title>Carrito</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="content">
+        <h2> Carrito de compra </h2>
+        {% if is_prod %}
+            {% for product in cart %}
+                <div class="product">
+                    <img>
+                    <h3> Nombre </h3>
+                    <h3> Precio_ind x Cantidad = Precio_Final </h3>
+                    <form> <button type="submit"> Eliminar del carrito </button> </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3> No tienes productos agregados </h3>
+        {% endif %}
+    </div>
+</body>
+</html>

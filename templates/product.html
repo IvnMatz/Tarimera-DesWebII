@@ -34,8 +34,9 @@
                 <li> <h3> {{ product.peso }} kg</h3> </li>
             </ul>
             <hr>
-            <form id="cart">
-                <input type="number" min="1" value="1">
+            <form id="cart" action="/add-cart" method="POST">
+                <input type="number" min="1" value="1" name="quantity">
+                <input type="hidden" name="id_p" value="{{ product.id }}">
                 <button type="submit"> Añadir al Carrito </button>
             </form>
 

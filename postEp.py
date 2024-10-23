@@ -3,6 +3,7 @@ from vFunctions import processor, allowed_file
 import pyodbc
 
 rutas_bp = Blueprint('rutas', __name__)
+rutas_bp.secret_key = 'butImWithTheHomiesRightNow'
 server = '(localdb)\\MainServer'  
 database = 'UsersWebP'
 UPLOAD_FOLDER = 'static/Uploaded_img/'
@@ -161,3 +162,4 @@ def c_theme():
         abort(500)
     
     return jsonify({'message' : 'cambiao'})
+

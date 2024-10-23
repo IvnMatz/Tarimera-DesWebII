@@ -1,5 +1,5 @@
 import pyodbc
-from flask import Flask, request, render_template, session, redirect, url_for, abort
+from flask import Flask, request, render_template, session, redirect, url_for, abort, jsonify
 from handleErrors import error_handlers_bp
 from postEp import rutas_bp
 from vFunctions import processor
@@ -71,6 +71,7 @@ def login():
                 session['mail'] = returnedUser[0][3]
                 #session['lang'] = returnedUser[0][4]
                 session['theme'] = returnedUser[0][4]
+                session['cart'] = {}
                 return redirect(url_for('index'))
             else:
                 return redirect(url_for('login'))
@@ -215,6 +216,28 @@ def search(search_term):
         return render_template("searched.html", SearchTerm=pSearchT, products=returnedP, user=False, theme=0)
     
 
+#cart route -------------------------------------------------------------------------------------
+@app.route('/cart')
+def cart():
+    leng = len(session['cart'])
+    print(session['cart'])
+    return render_template('cart.html', is_prod=leng, cart=session['cart'], user=session )
+
+@app.route('/add-cart', methods=['POST'])
+def add_cart():
+    if 'cart' in session:
+        id_product = request.form['id_p']
+        quantity = request.form['quantity']
+        print(id_product)
+        print(quantity)
+        session['cart'][id_product] = quantity
+        session.modified = True
+        print(session['cart'])
+
+        return jsonify({'message' : 'agregado'})
+    else:
+        return jsonify({'message' : 'NoSession'})
+
 #logout route (Redirects to index) --------------------------------------------------------------
 @app.route('/logout')
 def logout():
@@ -222,8 +245,8 @@ def logout():
     session.pop('username', None)
     session.pop('id', None)
     session.pop('mail', None)
-    session.pop('lang', None)
     session.pop('theme', None)
+    session.pop('cart', None)
     return redirect(url_for('index'))
 
 ## CORRER EL PROGRAMA ------------------------------------------------------------------------------
