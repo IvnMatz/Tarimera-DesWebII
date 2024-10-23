@@ -16,6 +16,7 @@
 <body>
     {% include 'navbar.html' %}
 
+    <div class="a"> 
     <div class="content">
         <img src="{{ url_for('static', filename='Uploaded_img/' + product.id|string + '.png') }}">
 
@@ -28,26 +29,25 @@
             </form>
             {% endif %}
             </div>
+            <hr>
             <h2 id="peso"> $ </h2> <h2> {{ product.precio }} </h2>
+            <h3> <b>Acerca de este producto</b> </h3>
             <h3> {{ product.desc }} </h3>
-            <table border="1">
-                <thead>
-                <tr class="d">
-                    <th> Dimensiones </th>
-                    <th> Peso </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="data">
-                    <th> {{ product.dimension }} </th>
-                    <th> {{ product.peso }} kg </th>
-                </tr>
-            </tbody>
-        </table>
+            <ul>
+                <li> <h3> {{ product.dimension }} </h3> </li>
+                <li> <h3> {{ product.peso }} kg</h3> </li>
+            </ul>
+            <hr>
+            <form id="cart">
+                <input type="number" min="1" value="1">
+                <button type="submit"> Añadir al Carrito </button>
+            </form>
 
         </div>
         
     </div>
+</div>
+    <hr>
     <div class="reviews">
         <h3> Reseñas: </h3>
 

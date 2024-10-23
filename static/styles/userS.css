@@ -21,7 +21,7 @@ body{
     border-radius: 7px;
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: #FAF7F0;
 }
 
 .profile-pic {
@@ -89,7 +89,7 @@ body{
     padding: 20px 20px;
     height: auto;
     flex-direction: column;
-    background-color: white;
+    background-color: #FAF7F0;
 }
 
 .review{

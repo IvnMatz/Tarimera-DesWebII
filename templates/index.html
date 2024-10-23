@@ -12,7 +12,7 @@
     
         {% include 'navbar.html' %}
 
-        <div class="content">
+        <div class="content" id="content">
             <div class="prI">
                 <img src="{{ url_for('static', filename='img/Tarima.png') }}" class="imgf">
             </div>
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="ProdL">
+        <div class="ProdL" id="products">
             <div class="products">
                 <h3 id="t"> Productos Destacados </h3>
                 {% if products %}
@@ -60,7 +60,7 @@
             </form>
         </div>
             
-
+        <script src="{{ url_for('static', filename='js/Loading.js') }}"></script>
         
 </body>
 </html>
