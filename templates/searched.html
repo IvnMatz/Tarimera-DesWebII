@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/navS.css') }}">
-    {% if theme==0 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/searchS.css') }}">
-    {% else %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='darkStyles/searchSD.css') }}">
-    {% endif %}
     
     <link rel="icon" href="{{ url_for('static', filename='icons/icon.png') }}" type="image/x-icon">
     <title>Resultados para {{ SearchTerm }}</title>
@@ -24,14 +20,14 @@
                     {% for fila in products|batch(3) %}
                         <div class="fila">
                             {% for product in fila %}
-                            <a href="http://localhost:5000/product/{{ product[0] }}">
-                                <div class="product">
-                                    <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
-                                    <h2> {{ product[1] }} </h2>
-                                    <h3> $ {{ product[2] }} </h3>
-                                </div>
-                            </a>
-                            {% endfor %}
+                        <a href="http://localhost:5000/product/{{ product[0] }}">
+                            <div class="product">
+                                <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
+                                <h3> {{ product[1] }} </h3>
+                                <p> $ {{ product[2] }} </p>
+                            </div>
+                        </a>
+                    {% endfor %}
                         </div>
                     {% endfor %}
 
