@@ -70,7 +70,7 @@ def login():
                 session['is_authenticated'] = True
                 session['mail'] = returnedUser[0][3]
                 #session['lang'] = returnedUser[0][4]
-                session['theme'] = returnedUser[0][5]
+                session['theme'] = returnedUser[0][4]
                 return redirect(url_for('index'))
             else:
                 return redirect(url_for('login'))

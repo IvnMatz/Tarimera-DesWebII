@@ -1,27 +1,41 @@
-
 .content {
     margin-top: 70px;
-    padding-top: 30px ;
-    padding-left: 80px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
+body{
+    background-image: url('../img/backg.jpg');
 }
 
-h3, h1 {
-    text-align: justify; /* Para justificar el texto, si es necesario */
-}   
+.content .left{
+    float: left;
+    width: 25%;
+    margin: 10px;
+    height: auto;
+    padding: 15px 15px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
 
 .profile-pic {
     width: 150px; /* Puedes ajustar el tamaño según sea necesario */
     height: 150px;
     border-radius: 50%; /* Esto crea la forma circular */
     object-fit: cover; /* Para asegurarse de que la imagen no se deforme */
-    border: 3px solid #ddd; /* Un borde opcional */
+    border: 3px solid #ddd; /* Un borde opcional */      
+    display: block;        
+}
 
-    float: left;       
-    margin-right: 50px;          
+.user-data{
+    display: block;
+    text-align: center;
 }
 
 .user-data h1, h2 {
@@ -29,7 +43,7 @@ h3, h1 {
     margin-right: 10px;
 }
 
-.user-data #id{
+.content .left .user-data #id{
     color: gray;
 }
 
@@ -37,75 +51,83 @@ h3, h1 {
     display: block;
 }
 
-.r-s {
-    margin-top: 70px;
-    padding-top: 30px ;
-    padding-left: 80px;
+.savedP{
+    display: block;
+    width: 95%;
+    float: none;
+    margin-top: 20px;
 }
 
-.reviews {
-    width: 48%;
-    height: auto;
-    display: inline-block;
-    border: 1px solid;
-    border-radius: 12px;
-    margin-left: 10px;
-    padding: 15px 10px;
-    vertical-align: top;
-}
-
-.saved {
-    width: 48%;
-    height: auto;
-    display: inline-block;
-    border: 1px solid;
-    border-radius: 12px;
-    padding: 15px 10px;
-    vertical-align: top;
-}
-
-.reviews h3, .saved h3{
-    padding-bottom: 20px;
-}
-
-.reviews .sec{
-    display: inline-block;
-    margin-right: 6px;
-    margin-bottom: 10px;
-}
-
-.review, .save{
-    padding: 6px 6px;
-    margin: 6px 6px;
-    border-radius: 12px;
-    border: 1px solid;
-
-}
-
-.saved a{
+.savedP a{
     text-decoration: none;
     color: black;
-}
-
-.save:hover{
-    background-color: #9CC2D9;
-}
-
-.themeB button{
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-    display: block;
-    border-radius: 12px;
-    width: 120px;
-    height: auto;
-    padding: 5px 5px;
-    margin-top: 10px;
     transition: 0.2s;
 }
 
-.themeB button:hover{
-    background-color: #9CC2D9;
-    width: 150px;
+.savedP a:hover{
+    background-color: #BCA37F;
 }
 
+.savedP h3{
+    margin-bottom: 9px;
+    display: block;
+}
+
+.savedP .prod{
+    border: 1px solid black;
+    display: block;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    padding: 10px 10px;
+}
+
+.content .right{
+    float: right;
+    width: 70%;
+    margin: 10px;
+    border-radius: 12px;
+    padding: 20px 20px;
+    height: auto;
+    flex-direction: column;
+    background-color: white;
+}
+
+.review{
+    display: block;
+    width: 95%;
+    border: 1px solid black;
+    padding: 10px 10px;
+    margin-bottom: 7px;
+    border-radius: 8px;
+    float: none;
+}
+
+.review *{
+    margin-bottom: 6px;
+}
+
+.review .sec{
+    display: inline-block;
+}
+
+.right h3{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.c {
+    display: inline-block;
+    padding: 10px 10px;
+
+    margin-top: 10px;
+}
+
+.c #form button{
+    width: 40px;
+    height: 40px;
+}
+
+.c #edit{
+    width: 60px;
+    height: 40px;
+}

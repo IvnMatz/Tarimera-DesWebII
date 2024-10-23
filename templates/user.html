@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/navS.css') }}">
-    {% if theme == 0 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/userS.css') }}">
-    {% else %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='darkStyles/userSD.css') }}">
-    {% endif %}
     
     <link rel="icon" href="{{ url_for('static', filename='icons/icon.png') }}" type="image/x-icon">
     <title>Perfil</title>
@@ -17,26 +13,36 @@
     {% include 'navbar.html' %}
 
     <div class="content">
-        <img src="{{ url_for('static', filename='img/pfp.png') }}" class="profile-pic">
-        
-        <div class="user-data">
-            <h1> {{ user.username }} <h2 id="id"> #{{ user.id }} </h2> </h1>
+        <div class="left">
+            <div class="user-data">
+            <img src="{{ url_for('static', filename='img/pfp.png') }}" class="profile-pic">
+            <h1 > {{ user.username }} <h2 id="id"> #{{ user.id }} </h2> </h1>
             <h2 id="mail"> {{ user.mail }} </h2>
-            <form action="/c-theme" method="POST" class="themeB" id="ctheme">
-                {% if theme == 0 %}
-                    <button type="submit" > Modo oscuro </button>
-                {% else %}
-                    <button type="submit" > Modo Claro </button>
-                {% endif %}
+            <form class="c" id="form">
+                <button> 🌙 </button>
             </form>
+            <button class="c" id="edit"> Editar Perfil </button>
+            </div>
+
+            <div class="savedP">
+                <h3> Productos Guardados </h3>
+                {% if savedProd %}
+                    {% for saved in savedProd %}
+                        <a  class="prod" href="http://localhost:5000/product/{{saved[2]}} ">
+                        <div class="save">
+                            <h4> {{ saved[0] }} </h4>
+                            <h4> $ {{ saved[1] }} </h4>
+                        </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <h4> No hay productos guardados </h4>
+                {% endif %}
+            </div>
         </div>
 
-    </div>
-
-    <div class="r-s">
-        <div class="reviews">
-            <h3> Reseñas de {{ user.username }} </h3>
-            <div class="leavedRev">
+        <div class="right">
+            <h3> Reseñas: </h3>
                 {% if reviews %}
                     {% for review in reviews %}
                         <div class="review">
@@ -49,27 +55,9 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <h4> Este usuario no tiene reseñas </h4>
+                    <h4> No tienes reseñas aún </h4>
                 {% endif %}
-            </div>
-        </div>
-
-        <div class="saved">
-            <h3> Productos guardados </h3>
-            <div class="s-prodL">
-                {% if savedProd %}
-                    {% for saved in savedProd %}
-                        <a class="prod" href="http://localhost:5000/product/{{saved[2]}} ">
-                        <div class="save">
-                            <h4> {{ saved[0] }} </h4>
-                            <h4> {{ saved[1] }} </h4>
-                        </div>
-                        </a>
-                    {% endfor %}
-                {% else %}
-                    <h4> No hay productos guardados </h4>
-                {% endif %}
-            </div>
+            
         </div>
     </div>
 
