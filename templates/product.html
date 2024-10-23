@@ -37,6 +37,8 @@
             <form id="cart" action="/add-cart" method="POST">
                 <input type="number" min="1" value="1" name="quantity">
                 <input type="hidden" name="id_p" value="{{ product.id }}">
+                <input type="hidden" name="name" value="{{ product.name }}">
+                <input type="hidden" name="price" value="{{ product.precio }}">
                 <button type="submit"> Añadir al Carrito </button>
             </form>
 

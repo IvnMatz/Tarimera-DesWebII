@@ -71,7 +71,7 @@ def login():
                 session['mail'] = returnedUser[0][3]
                 #session['lang'] = returnedUser[0][4]
                 session['theme'] = returnedUser[0][4]
-                session['cart'] = {}
+                session['cart'] = []
                 return redirect(url_for('index'))
             else:
                 return redirect(url_for('login'))
@@ -219,6 +219,8 @@ def search(search_term):
 #cart route -------------------------------------------------------------------------------------
 @app.route('/cart')
 def cart():
+    if 'cart' not in session:
+        return redirect('http://localhost:5000')
     leng = len(session['cart'])
     print(session['cart'])
     return render_template('cart.html', is_prod=leng, cart=session['cart'], user=session )
@@ -228,15 +230,28 @@ def add_cart():
     if 'cart' in session:
         id_product = request.form['id_p']
         quantity = request.form['quantity']
-        print(id_product)
-        print(quantity)
-        session['cart'][id_product] = quantity
+        name = request.form['name']
+        price = request.form['price']
+
+        product = [str(id_product), name, price, quantity, int(price) * int(quantity)]
+        # 0: ID     1:NOMBRE    2:PRECIO    3:CANTIDAD      4:PRECIO FINAL
+        session['cart'].append(product)
         session.modified = True
-        print(session['cart'])
 
         return jsonify({'message' : 'agregado'})
     else:
         return jsonify({'message' : 'NoSession'})
+    
+@app.route('/del-cart', methods=['POST'])
+def deleteC():
+    id_p = request.form['id']
+
+    new_cart = [arr for arr in session['cart'] if arr[0] != str(id_p) ]
+    session.pop('cart', None)
+    session['cart'] = new_cart
+    session.modified = True
+    
+    return redirect('http://localhost:5000/cart')
 
 #logout route (Redirects to index) --------------------------------------------------------------
 @app.route('/logout')

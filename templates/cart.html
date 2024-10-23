@@ -12,19 +12,32 @@
     {% include 'navbar.html' %}
 
     <div class="content">
-        <h2> Carrito de compra </h2>
+        <h2 id="title"> Carrito de compra </h2>
+        <hr>
+        <h2 id="No"> Productos: </h2>
+        <h2 id="No"> {{ is_prod }} </h2>
         {% if is_prod %}
             {% for product in cart %}
                 <div class="product">
-                    <img>
-                    <h3> Nombre </h3>
-                    <h3> Precio_ind x Cantidad = Precio_Final </h3>
-                    <form> <button type="submit"> Eliminar del carrito </button> </form>
+                    <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
+                    <div class="product-data">
+                    <h3> {{ product[1] }} </h3>
+                    <h3> ${{ product[2] }} x {{ product[3] }} = ${{ product[4] }} </h3>
+                    <form action="/del-cart" method="POST" id="delete_{{ product[0] }}">
+                        <input type="hidden" name="id" value="{{ product[0] }}">
+                         <button type="submit"> Eliminar del carrito </button> 
+                    </form>
+                    </div>
                 </div>
             {% endfor %}
         {% else %}
             <h3> No tienes productos agregados </h3>
         {% endif %}
+
+        <form id="pay">
+            <button type="submit"> Pagar </button>
+        </form>
     </div>
+
 </body>
 </html>
