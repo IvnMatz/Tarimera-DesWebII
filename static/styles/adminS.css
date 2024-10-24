@@ -78,3 +78,33 @@ h1{
     background-color: #BCA37F;
     color: white;
 }
+
+.tops{
+    margin: 20px;
+    padding: 10px 10px;
+}
+
+.tops input{
+    margin: 8px 10px;
+    padding: 8px 8px;
+    border: 1px solid;
+    border-radius: 12px;
+    vertical-align: middle;
+}
+
+.tops button{
+    margin-bottom: 5px;
+    padding: 8px 8px;
+    width: 15%;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    transition: 0.2s;
+    vertical-align: middle;
+}
+
+.tops button:hover{
+    background-color: #BCA37F;
+    color: white;
+}

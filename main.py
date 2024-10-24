@@ -2,7 +2,7 @@ import pyodbc
 from flask import Flask, request, render_template, session, redirect, url_for, abort
 from handleErrors import error_handlers_bp
 from postEp import rutas_bp
-from vFunctions import processor
+from vFunctions import processor, loader
 
 UPLOAD_FOLDER = 'static/Uploaded_img'
 
@@ -24,10 +24,11 @@ conn_str = f'DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={server};DATABASE={
 @app.route("/")
 def index():
     try:
+        top = loader('topP.json')
         conn = pyodbc.connect(conn_str)
         print("Conexión exitosa")
         cursor = conn.cursor()
-        cursor.execute(f"select top (3) id_product, nombre, price from products")
+        cursor.execute(f"select id_product, nombre, price from products where id_product={top[0]} or id_product={top[1]} or id_product={top[2]}")
         returnedProd = cursor.fetchall()
         cursor.close()
         conn.close()
@@ -188,6 +189,7 @@ def admin():
         print(session)
         if session['id'] == 0:
             try:
+                top = loader('topP.json')
                 conn = pyodbc.connect(conn_str)
                 cursor = conn.cursor()
                 cursor.execute("select id_product, nombre from products")
@@ -196,7 +198,7 @@ def admin():
                 conn.close()
             except:
                 abort(500)
-            return render_template("admin.html", user=session, theme=session['theme'], products = products)
+            return render_template("admin.html", user=session, theme=session['theme'], products = products, top=top)
         else:
             abort(403)
 
@@ -248,4 +250,4 @@ def logout():
 
 ## CORRER EL PROGRAMA ------------------------------------------------------------------------------
 if __name__ == '__main__':
-    app.run(threaded=True)
+    app.run(debug=True)

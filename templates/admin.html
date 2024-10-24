@@ -46,6 +46,20 @@
             </details>
         </div>
 
+        <div class="top-product">
+            <details class="det-add">
+            <summary class="sum"> Productos Destacados </summary>
+            <div class="tops">
+            <form action="/top-products" method="POST">
+            <input type="text" name="id_1" value="{{ top[0] }}">
+            <input type="text" name="id_2" value="{{ top[1] }}">
+            <input type="text" name="id_3" value="{{ top[2] }}">
+            <button type="submit"> Editar </button>
+            </form>
+        </div>
+            </details>
+        </div>
+
         
     </div>
 

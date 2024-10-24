@@ -1,6 +1,7 @@
 from flask import Blueprint, abort, request, redirect, session, jsonify, url_for
 from vFunctions import processor, allowed_file
 import pyodbc
+import json
 
 rutas_bp = Blueprint('rutas', __name__)
 rutas_bp.secret_key = 'butImWithTheHomiesRightNow'
@@ -202,6 +203,31 @@ def deleteP():
             cursor.commit()
             cursor.close()
             conn.close()
+            return redirect(url_for('admin'))
+        except:
+            abort(500)
+    else:
+        abort(403)
+
+@rutas_bp.route('/top-products', methods=['POST'])
+def topP():
+    product1 = request.form['id_1']
+    product2 = request.form['id_2']
+    product3 = request.form['id_3']
+
+    if product1=='' or product2 == '' or product3=='':
+        abort(500)
+
+    if session['id'] == 0:
+        try:
+            data = { 
+                'product1' : int(product1),
+                'product2' : int(product2),
+                'product3' : int(product3)
+             }
+            
+            with open('topP.json', 'w') as file:
+                json.dump(data, file)
             return redirect(url_for('admin'))
         except:
             abort(500)

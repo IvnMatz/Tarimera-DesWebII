@@ -133,6 +133,7 @@ html, body {
     margin: 20px;
     height: 300px;
     transition: 0.2s;
+    vertical-align: top;
 
     align-items: center;
     justify-content: center;
