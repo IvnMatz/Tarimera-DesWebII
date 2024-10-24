@@ -1,4 +1,4 @@
-from flask import Blueprint, abort, request, redirect, session, jsonify
+from flask import Blueprint, abort, request, redirect, session, jsonify, url_for
 from vFunctions import processor, allowed_file
 import pyodbc
 
@@ -33,7 +33,7 @@ def registerN():
         cursor.close()
         conn.close()
 
-        return redirect("http://localhost:5000")
+        return redirect(url_for('index'))
     except Exception as e:
         abort(500)
 
@@ -77,7 +77,7 @@ def searchP():
     searchT = request.form['search']
     pSearchT = processor(searchT)
 
-    redir = "http://localhost:5000/" "search/" + pSearchT
+    redir = url_for('search', search_term=pSearchT)
 
     return redirect(redir)
 
@@ -94,7 +94,7 @@ def saveProduct(id_product):
         if returned:
             cursor.execute(f"DELETE FROM saved_product WHERE id_user={userId} AND id_product={id_product}")
             cursor.commit()
-            return jsonify({ 'message' : 'saved' })
+            return jsonify({ 'message' : 'deleted' })
 
         cursor.execute(f'INSERT INTO saved_product VALUES({userId}, {int(id_product)}) ')
         cursor.commit()
@@ -109,12 +109,12 @@ def saveProduct(id_product):
 @rutas_bp.route('/upload_product', methods=['POST'])
 def upload_product():
     if 'is_authenticated' not in session:
-        return "No se tiene una sesión iniciada"
+        return jsonify({'message' : 'problem'})
     if session['id'] != 0:
-        return "No se tiene permisos para acceder a esta ruta"
+        return jsonify({'message' : 'problem'})
 
     if "file" not in request.files:
-            return "No se encontró ningún archivo"
+            return jsonify({'message' : 'problem'})
     
     name = request.form['nombre']
     precio = int(request.form['precio'])
@@ -163,4 +163,30 @@ def c_theme():
     
     return jsonify({'message' : 'cambiao'})
 
+@rutas_bp.route('/add-cart', methods=['POST'])
+def add_cart():
+    if 'cart' in session:
+        id_product = request.form['id_p']
+        quantity = request.form['quantity']
+        name = request.form['name']
+        price = request.form['price']
 
+        product = [str(id_product), name, price, quantity, int(price) * int(quantity)]
+        # 0: ID     1:NOMBRE    2:PRECIO    3:CANTIDAD      4:PRECIO FINAL
+        session['cart'].append(product)
+        session.modified = True
+
+        return jsonify({'message' : 'agregado'})
+    else:
+        return jsonify({'message' : 'NoSession'})
+    
+@rutas_bp.route('/del-cart', methods=['POST'])
+def deleteC():
+    id_p = request.form['id']
+
+    new_cart = [arr for arr in session['cart'] if arr[0] != str(id_p) ]
+    session.pop('cart', None)
+    session['cart'] = new_cart
+    session.modified = True
+    
+    return redirect(url_for('cart'))

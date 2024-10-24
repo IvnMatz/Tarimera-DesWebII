@@ -1,5 +1,5 @@
 import pyodbc
-from flask import Flask, request, render_template, session, redirect, url_for, abort, jsonify
+from flask import Flask, request, render_template, session, redirect, url_for, abort
 from handleErrors import error_handlers_bp
 from postEp import rutas_bp
 from vFunctions import processor
@@ -220,38 +220,11 @@ def search(search_term):
 @app.route('/cart')
 def cart():
     if 'cart' not in session:
-        return redirect('http://localhost:5000')
+        return redirect(url_for('index'))
     leng = len(session['cart'])
     print(session['cart'])
     return render_template('cart.html', is_prod=leng, cart=session['cart'], user=session )
 
-@app.route('/add-cart', methods=['POST'])
-def add_cart():
-    if 'cart' in session:
-        id_product = request.form['id_p']
-        quantity = request.form['quantity']
-        name = request.form['name']
-        price = request.form['price']
-
-        product = [str(id_product), name, price, quantity, int(price) * int(quantity)]
-        # 0: ID     1:NOMBRE    2:PRECIO    3:CANTIDAD      4:PRECIO FINAL
-        session['cart'].append(product)
-        session.modified = True
-
-        return jsonify({'message' : 'agregado'})
-    else:
-        return jsonify({'message' : 'NoSession'})
-    
-@app.route('/del-cart', methods=['POST'])
-def deleteC():
-    id_p = request.form['id']
-
-    new_cart = [arr for arr in session['cart'] if arr[0] != str(id_p) ]
-    session.pop('cart', None)
-    session['cart'] = new_cart
-    session.modified = True
-    
-    return redirect('http://localhost:5000/cart')
 
 #logout route (Redirects to index) --------------------------------------------------------------
 @app.route('/logout')

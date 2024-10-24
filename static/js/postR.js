@@ -54,7 +54,10 @@ document.getElementById('form').addEventListener('submit', async function (event
       // Verifica la respuesta para mostrar una alerta
       if(result.message){
        if (result.message === 'saved' ){
-        location.reload();
+        alert("Producto Guardado en Perfil")
+      }
+      else if(result.message === 'deleted'){
+        alert("Producto borrado de Perfil")
       }
     }
   
