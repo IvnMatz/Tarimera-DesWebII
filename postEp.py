@@ -190,3 +190,21 @@ def deleteC():
     session.modified = True
     
     return redirect(url_for('cart'))
+
+@rutas_bp.route('/delete-product', methods=['POST'])
+def deleteP():
+    id_p = request.form['id']
+    if session['id'] == 0:
+        try:
+            conn = pyodbc.connect(conn_str)
+            cursor = conn.cursor()
+            cursor.execute(f"delete from products where id_product={id_p}")
+            cursor.commit()
+            cursor.close()
+            conn.close()
+            return redirect(url_for('admin'))
+        except:
+            abort(500)
+    else:
+        abort(403)
+

@@ -32,6 +32,20 @@
             
         </div>
 
+        <div class="del-product">
+            <details class="det-add">
+            <summary class="sum"> Eliminar producto </summary>
+            <div class="products">
+            {% for product in products %}
+                <form action="delete-product" method="POST" >
+                    <input type="hidden" name="id" value="{{product[0]}}">
+                     <button type="submit" class="producto"> {{product[0]}} | {{product[1]}} </button> 
+                    </form>
+            {% endfor %}
+        </div>
+            </details>
+        </div>
+
         
     </div>
 

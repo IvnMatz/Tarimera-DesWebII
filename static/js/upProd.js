@@ -23,7 +23,8 @@ document.getElementById('upload').addEventListener('submit', async function (eve
         alert('No se puede envíar una reseña vacia');
       }
       else if (result.message === 'subido' ){
-        alert("Producto publicado con éxito")
+        alert("Producto publicado con éxito");
+        location.reload();
       }
       else if (result.message === 'problem'){
         alert("Hubo un problema con tu petición :(")

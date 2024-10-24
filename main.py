@@ -187,7 +187,16 @@ def admin():
     else:
         print(session)
         if session['id'] == 0:
-            return render_template("admin.html", user=session, theme=session['theme'])
+            try:
+                conn = pyodbc.connect(conn_str)
+                cursor = conn.cursor()
+                cursor.execute("select id_product, nombre from products")
+                products = cursor.fetchall()
+                cursor.close()
+                conn.close()
+            except:
+                abort(500)
+            return render_template("admin.html", user=session, theme=session['theme'], products = products)
         else:
             abort(403)
 

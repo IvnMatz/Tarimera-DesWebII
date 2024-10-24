@@ -17,6 +17,7 @@
     padding: 20px 20px;
     border: 1px solid;
     border-radius: 12px;
+    margin-bottom: 10px;
 
     cursor: pointer;
 }
@@ -54,4 +55,26 @@
 
 h1{
     margin-bottom: 20px;
+}
+
+.products{
+    margin: 20px;
+    padding: 10px 10px;
+}
+
+.producto{
+    margin-bottom: 5px;
+    padding: 20px 20px;
+    width: 30%;
+    height: 60px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    transition: 0.2s;
+
+}
+
+.producto:hover{
+    background-color: #BCA37F;
+    color: white;
 }
