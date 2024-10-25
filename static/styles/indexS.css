@@ -192,4 +192,33 @@ html, body {
     display: block;
 }
 
+/* DARK STYLES*/
+
+.theme-1{
+    background-color: #0D1117;
+    color: white;
+}
+
+.theme-1 .prT a:hover{
+    color: rgb(255, 255, 255);
+    background-color: #212830;
+    text-shadow: 0px 0px 0px;
+}
+
+.theme-1 .products a{
+    color: white;
+    text-decoration: none;
+}
+
+.theme-1 .product:hover{
+    background-color: #212830;
+}
+
+.theme-1 .product {
+    border: 1px solid white;
+}
+
+.theme-1 .contact form{
+    background-color: #0D1117;
+}
 

@@ -74,3 +74,42 @@ hr{
     height: 60px;
     background-color: #BCA37F;
 }
+
+/* DARK STYLES */
+
+.theme-1{
+    background-color: #0D1117;
+}
+
+.theme-1 .product{
+    border: 1px solid rgb(255, 255, 255);
+}
+
+
+.theme-1 .product-data form button{
+    background-color: #0D1117;
+    border: 1px solid rgb(255, 255, 255);
+    color: white;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.theme-1 .product-data form button:hover{
+    background-color: #212830;
+    color: white;
+}
+
+.theme-1 #pay button{
+    width: 60%;
+    text-align: center;
+    height: 50px;
+    background-color: #0D1117;
+    color: white;
+    border: 1px solid white;
+}
+
+.theme-1 #pay button:hover{
+    background-color: #212830;
+    color: white;
+}
+

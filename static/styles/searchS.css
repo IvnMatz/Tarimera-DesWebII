@@ -66,3 +66,22 @@
     font-family: 'InterB', sans-serif;
     font-weight: 700;
 }
+
+/* DARK STYLES */
+.theme-1{
+    background-color: #0D1117;
+    color: white;
+}
+
+.theme-1 .product:hover{
+    background-color: #212830;
+}
+
+.theme-1 .product {
+    border: 1px solid white;
+}
+
+.theme-1 .fila a{
+    color: white;
+}
+

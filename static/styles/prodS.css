@@ -266,7 +266,30 @@ ul{
     padding-right: 10px;
 }
 
+/* DARK STYLES */
 
+.theme-1{
+    background-color: #0D1117;
+    color: white;
+}
 
+.theme-1 .product-data{
+    background-color: #212830;
+}
+
+.theme-1 input, .theme-1 textarea{
+    background-color: #0D1117;
+    color: white;
+    border: 1px solid white;
+}
+
+.theme-1 .addRform #t, .theme-1 .addRform #d{
+    border: 1px solid white;
+}
+
+.theme-1 .addRform button{
+    border: 1px solid white;
+    color: white;
+}
 
 

@@ -9,7 +9,7 @@
     <link rel="icon" href="{{ url_for('static', filename='icons/icon.png') }}" type="image/x-icon">
     <title>{{ product.name }}</title>
 </head>
-<body>
+<body class="theme-{{ theme }}">
     {% include 'navbar.html' %}
 
     <div class="a"> 
