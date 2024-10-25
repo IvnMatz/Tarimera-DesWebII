@@ -28,8 +28,16 @@ def index():
         conn = pyodbc.connect(conn_str)
         print("Conexión exitosa")
         cursor = conn.cursor()
-        cursor.execute(f"select id_product, nombre, price from products where id_product={top[0]} or id_product={top[1]} or id_product={top[2]}")
-        returnedProd = cursor.fetchall()
+        cursor.execute(f"select id_product, nombre, price from products where id_product={top[0]}")
+        Prod = cursor.fetchall()
+        returnedProd = []
+        returnedProd.append(Prod[0])
+        cursor.execute(f"select id_product, nombre, price from products where id_product={top[1]}")
+        Prod = cursor.fetchall()
+        returnedProd.append(Prod[0])
+        cursor.execute(f"select id_product, nombre, price from products where id_product={top[2]}")
+        prod = cursor.fetchall()
+        returnedProd.append(prod[0])
         cursor.close()
         conn.close()
         
@@ -234,7 +242,7 @@ def cart():
         return redirect(url_for('index'))
     leng = len(session['cart'])
     print(session['cart'])
-    return render_template('cart.html', is_prod=leng, cart=session['cart'], user=session )
+    return render_template('cart.html', is_prod=leng, cart=session['cart'], user=session, theme=session['theme'] )
 
 
 #logout route (Redirects to index) --------------------------------------------------------------
@@ -250,4 +258,4 @@ def logout():
 
 ## CORRER EL PROGRAMA ------------------------------------------------------------------------------
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(threaded=True)

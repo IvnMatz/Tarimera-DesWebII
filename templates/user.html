@@ -9,7 +9,7 @@
     <link rel="icon" href="{{ url_for('static', filename='icons/icon.png') }}" type="image/x-icon">
     <title>Perfil</title>
 </head>
-<body>
+<body class="theme-{{ theme }}">
     {% include 'navbar.html' %}
 
     <div class="content">
@@ -18,12 +18,12 @@
             <img src="{{ url_for('static', filename='img/pfp.png') }}" class="profile-pic">
             <h1 > {{ user.username }} <h2 id="id"> #{{ user.id }} </h2> </h1>
             <h2 id="mail"> {{ user.mail }} </h2>
-            <form class="c" id="form">
-                <button> 🌙 </button>
+            <form id="ctheme" action="/c-theme" method="POST">
+                <button class="c" > 🌙 </button>
             </form>
             <button class="c" id="edit"> Editar Perfil </button>
             </div>
-
+    
             <div class="savedP">
                 <h3> Productos Guardados </h3>
                 {% if savedProd %}

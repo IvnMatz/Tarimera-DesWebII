@@ -116,3 +116,35 @@
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
 }
+
+/* DARK MODE */
+
+.theme-1{
+    color:white;
+}
+
+.theme-1 .navbar {
+    background-color: #010409;
+}
+
+.theme-1 .navbar a {
+    color: rgb(255, 255, 255);
+}
+
+.theme-1 .navbar a:hover{
+    background-color: #212830;
+    color: rgb(255, 255, 255);
+}
+
+.theme-1 .navbar input{
+
+    color: rgb(255, 255, 255);
+    background-color: #010409;
+
+}
+
+.theme-1 .navbar input:hover, .navbar ul li input:focus{
+    width: 520px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}

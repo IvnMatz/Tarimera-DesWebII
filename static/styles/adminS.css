@@ -108,3 +108,31 @@ h1{
     background-color: #BCA37F;
     color: white;
 }
+
+/* DARK STYLES */
+.theme-1{
+    background-color: #0D1117;
+}
+
+.theme-1 button{
+    background-color: #0D1117;
+    color: white;
+    border: 1px solid white;
+}
+
+.theme-1 button:hover{
+    background-color: #212830;
+    color: white;
+}
+
+.theme-1 input{
+    color: white;
+    border: 1px solid white;
+    background-color: #0D1117;
+}
+
+.theme-1 textarea{
+    color: white;
+    border: 1px solid white;
+    background-color: #0D1117;
+}
