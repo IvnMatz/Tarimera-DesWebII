@@ -234,3 +234,24 @@ def topP():
     else:
         abort(403)
 
+@rutas_bp.route('/update-user-api', methods=['POST'])
+def updateUser():
+    Nname = request.form['username']
+    Npassw = request.form['password']
+    Nmail = request.form['mail']
+
+    try:
+        conn = pyodbc.connect(conn_str)
+        cursor = conn.cursor()
+        cursor.execute(f"update users set username=\'{Nname}\' where id_user={int(session['id'])}")
+        cursor.commit()
+        cursor.execute(f"update users set passw=\'{Npassw}\' where id_user={int(session['id'])}")
+        cursor.commit()
+        cursor.execute(f"update users set mail=\'{Nmail}\' where id_user={int(session['id'])}")
+        cursor.commit()
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        return str(e)
+    return redirect(url_for('userpage'))
+

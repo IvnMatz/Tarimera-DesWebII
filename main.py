@@ -77,6 +77,7 @@ def login():
                 session['username'] = returnedUser[0][1]
                 session['id'] = returnedUser[0][0] # 0=ID 1=Username 2=Password 3=Mail 4=Language 5=theme (0=light, 1=Dark)
                 session['is_authenticated'] = True
+                session['pwrd'] = returnedUser[0][2]
                 session['mail'] = returnedUser[0][3]
                 #session['lang'] = returnedUser[0][4]
                 session['theme'] = returnedUser[0][4]
@@ -244,12 +245,18 @@ def cart():
     print(session['cart'])
     return render_template('cart.html', is_prod=leng, cart=session['cart'], user=session, theme=session['theme'] )
 
+#UPDATE USER ROUTE ------------------------------------------------------------------------------
+@app.route('/update-user')
+def updateU():
+    return render_template('editProf.html', name=session['username'], mail=session['mail'], passw=session['pwrd'])
+
 
 #logout route (Redirects to index) --------------------------------------------------------------
 @app.route('/logout')
 def logout():
     session.pop('is_authenticated', None)
     session.pop('username', None)
+    session.pop('pwrd', None)
     session.pop('id', None)
     session.pop('mail', None)
     session.pop('theme', None)

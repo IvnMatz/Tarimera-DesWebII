@@ -1,0 +1,19 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/formsStyles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='icons/icon.png') }}" type="image/x-icon">
+
+</head>
+<body>
+    <form method="POST" class="form-box" action="/update-user-api">
+        <h2 class="title"> Editar Perfil </h2>
+        <input type="text" name="username" maxlength="50" placeholder="Nombre de Usuario" autocomplete="off" value="{{name}}">
+        <input type="text" name="password" maxlength="19" placeholder="Contraseña" autocomplete="off" value="{{passw}}">
+        <input type="text" name="mail" maxlength="100" placeholder="Correo" autocomplete="off" value="{{mail}}">
+        <button type="submit"> Enviar Datos </button>
+    </form>
+</body>
+</html>
