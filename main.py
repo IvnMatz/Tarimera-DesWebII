@@ -79,7 +79,6 @@ def login():
                 session['is_authenticated'] = True
                 session['pwrd'] = returnedUser[0][2]
                 session['mail'] = returnedUser[0][3]
-                #session['lang'] = returnedUser[0][4]
                 session['theme'] = returnedUser[0][4]
                 session['cart'] = []
                 return redirect(url_for('index'))
@@ -211,9 +210,6 @@ def admin():
         else:
             abort(403)
 
-#UPLOAD ROUTE (POST)-----------------------------------------------------------------------------
-
-    
 # SEARCH ROUTE ----------------------------------------------------------------------------------
 @app.route('/search/<search_term>', methods=['GET'])
 def search(search_term):

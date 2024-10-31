@@ -14,15 +14,15 @@
        <div class="right">
             {% if user %}
                 {% if user.id == 0 %}
-                    <a href="http://localhost:5000/admin"> Admin </a>
+                    <a href="/admin"> Admin </a>
                 {% endif %}
-                    <a href="http://localhost:5000/cart"> 🛒 </a>
-                    <a href="http://localhost:5000/user"> Perfil </a>
-                    <a href="http://localhost:5000/logout" class="act"> Cerrar Sesión </a>
+                    <a href="/cart"> 🛒 </a>
+                    <a href="/user"> Perfil </a>
+                    <a href="/logout" class="act"> Cerrar Sesión </a>
         
             {% else %}
-                <a href="http://localhost:5000/login" class="act"> Iniciar Sesión </a>
-                <a href="http://localhost:5000/register" class="act"> Registrar Usuario </a>
+                <a href="/login" class="act"> Iniciar Sesión </a>
+                <a href="/register" class="act"> Registrar Usuario </a>
     {% endif %}
        </div>
     </nav>

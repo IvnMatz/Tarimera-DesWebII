@@ -20,7 +20,7 @@
                     {% for fila in products|batch(3) %}
                         <div class="fila">
                             {% for product in fila %}
-                        <a href="http://localhost:5000/product/{{ product[0] }}">
+                        <a href="h/product/{{ product[0] }}">
                             <div class="product">
                                 <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
                                 <h3> {{ product[1] }} </h3>

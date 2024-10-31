@@ -29,7 +29,7 @@
                 <h3 id="t"> Productos Destacados </h3>
                 {% if products %}
                     {% for product in products %}
-                        <a href="http://localhost:5000/product/{{ product[0] }}">
+                        <a href="/product/{{ product[0] }}">
                             <div class="product">
                                 <img src="{{ url_for('static', filename='Uploaded_img/' + product[0]|string + '.png') }}">
                                 <h3> {{ product[1] }} </h3>

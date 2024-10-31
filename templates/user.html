@@ -21,14 +21,14 @@
             <form id="ctheme" action="/c-theme" method="POST">
                 <button class="c" > 🌙 </button>
             </form>
-            <a class="c" id="edit" href="http://localhost:5000/update-user"> Editar Perfil </a>
+            <a class="c" id="edit" href="/update-user"> Editar Perfil </a>
             </div>
     
             <div class="savedP">
                 <h3> Productos Guardados </h3>
                 {% if savedProd %}
                     {% for saved in savedProd %}
-                        <a  class="prod" href="http://localhost:5000/product/{{saved[2]}} ">
+                        <a  class="prod" href="/product/{{saved[2]}} ">
                         <div class="save">
                             <h4> {{ saved[0] }} </h4>
                             <h4> $ {{ saved[1] }} </h4>
