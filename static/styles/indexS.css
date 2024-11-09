@@ -160,15 +160,12 @@ html, body {
 .contact{
     width: 100%;
     height: auto;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    place-items: center;
     background-image: url('../img/back-c.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin-top: 70px;
-    padding: 20px;
     color: white;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
@@ -179,7 +176,6 @@ html, body {
     height: auto;
     padding: 40px 40px;
     border-radius: 10px;
-    margin-left: 250px;
     text-align: center;
 }
 
@@ -190,6 +186,32 @@ html, body {
 
 .contact button{
     display: block;
+    place-self: center;
+    width: 70%;
+    border: 1px solid black;
+    border-radius: 12px;
+    color: white;
+    background-color: transparent;
+    transition: 0.2s;
+    height: 30px;
+}
+
+.contact input{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: #BCA37F;
+}
+
+.contact button:hover{
+    background-color: #dfc29a;
+}
+
+.contact textarea{
+    padding: 10px;
+    width: 70%;
+    background-color: #BCA37F;
+    border: 1px solid black;
 }
 
 /* DARK STYLES*/
@@ -221,4 +243,5 @@ html, body {
 .theme-1 .contact form{
     background-color: #0D1117;
 }
+
 
